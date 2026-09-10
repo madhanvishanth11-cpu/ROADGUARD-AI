@@ -51,8 +51,8 @@ export const AuthCallback = () => {
 
       } catch (err: any) {
         console.error('Auth Callback Error:', err);
-        setError('Authentication failed. Please try again.');
-        setTimeout(() => navigate('/login'), 3000);
+        setError(`Authentication failed: ${err.message || 'Unknown error'}`);
+        setTimeout(() => navigate('/login'), 5000);
       }
     };
 
