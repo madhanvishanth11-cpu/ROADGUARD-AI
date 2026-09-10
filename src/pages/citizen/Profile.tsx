@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { User, Mail, Shield, Calendar, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { User, Mail, Calendar, Loader2, CheckCircle, AlertCircle, BadgeInfo } from 'lucide-react';
 
 export const Profile = () => {
   const { profile, updateProfile } = useAuth();
@@ -91,10 +91,18 @@ export const Profile = () => {
                 <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">
                   Account Role
                 </label>
-                <div className="flex items-center gap-2 text-gray-700 bg-gray-50 px-4 py-3 rounded-xl border border-gray-200">
-                  <Shield className="w-5 h-5 text-gray-400" />
-                  <span className="font-bold">{profile.role}</span>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <BadgeInfo className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    disabled
+                    value={profile?.role || 'CITIZEN'}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-600 font-bold outline-none cursor-not-allowed"
+                  />
                 </div>
+                <p className="text-xs text-gray-500 mt-2">Your role determines your access level.</p>
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">
