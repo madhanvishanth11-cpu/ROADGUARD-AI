@@ -1,16 +1,24 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-primary: #1d4ed8;
-  --color-primary-hover: #1e40af;
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-200;
+  }
+  .dark body {
+    @apply bg-slate-900 text-slate-100;
+  }
 }
 
 @layer utilities {
   .glass-card {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    @apply bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-white/30 dark:border-slate-700/50 shadow-sm;
   }
 }

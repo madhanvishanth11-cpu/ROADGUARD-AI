@@ -23,19 +23,19 @@ export const AIResultCard = ({
   
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'CRITICAL': return 'bg-red-100 text-red-800 border-red-200';
-      case 'HIGH': return 'bg-orange-100 text-orange-800 border-orange-200';
-      case 'MEDIUM': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'LOW': return 'bg-green-100 text-green-800 border-green-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'CRITICAL': return 'bg-red-100 dark:bg-red-900/30 text-red-800 border-red-200 dark:border-red-800';
+      case 'HIGH': return 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300 border-orange-200 dark:border-orange-800';
+      case 'MEDIUM': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800';
+      case 'LOW': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800';
+      default: return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700';
     }
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-      <div className="bg-blue-50 px-6 py-4 border-b border-blue-100 flex items-center justify-between">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-blue-50 dark:bg-blue-900/20 px-6 py-4 border-b border-blue-100 dark:border-blue-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Brain className="w-5 h-5 text-blue-600" />
+          <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           <h3 className="font-bold text-blue-900">AI Analysis Results</h3>
         </div>
         {isDemo && (
@@ -47,27 +47,27 @@ export const AIResultCard = ({
 
       <div className="p-6">
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Confidence</p>
-            <p className="text-xl font-black text-gray-900">{confidence}%</p>
+          <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+            <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Confidence</p>
+            <p className="text-xl font-black text-slate-900 dark:text-white">{confidence}%</p>
           </div>
-          <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Severity</p>
-            <p className="text-xl font-black text-gray-900">{severity}</p>
+          <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+            <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Severity</p>
+            <p className="text-xl font-black text-slate-900 dark:text-white">{severity}</p>
           </div>
           {estimatedSize && (
-            <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 col-span-2">
-              <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Estimated Size</p>
-              <p className="text-lg font-bold text-gray-900">{estimatedSize}</p>
+            <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-700 col-span-2">
+              <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Estimated Size</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{estimatedSize}</p>
             </div>
           )}
         </div>
 
-        <div className="border-t border-gray-100 pt-6">
+        <div className="border-t border-slate-100 dark:border-slate-700 pt-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Activity className="w-5 h-5 text-gray-400" />
-              <h4 className="font-bold text-gray-900">Risk Assessment</h4>
+              <Activity className="w-5 h-5 text-slate-400 dark:text-slate-500" />
+              <h4 className="font-bold text-slate-900 dark:text-white">Risk Assessment</h4>
             </div>
             <span className={`px-3 py-1 rounded-full text-xs font-bold border ${getLevelColor(riskLevel)}`}>
               {riskLevel} PRIORITY
@@ -75,18 +75,18 @@ export const AIResultCard = ({
           </div>
 
           <div className="flex items-end gap-2 mb-6">
-            <span className="text-4xl font-black text-gray-900">{riskScore}</span>
-            <span className="text-gray-500 font-bold mb-1">/ 100</span>
+            <span className="text-4xl font-black text-slate-900 dark:text-white">{riskScore}</span>
+            <span className="text-slate-500 dark:text-slate-400 font-bold mb-1">/ 100</span>
           </div>
 
           <div className="space-y-3">
-            <p className="text-sm font-bold text-gray-600 flex items-center gap-1">
+            <p className="text-sm font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1">
               <Info className="w-4 h-4" /> Why this score?
             </p>
             {riskFactors.map((factor, idx) => (
-              <div key={idx} className="flex items-center justify-between text-sm p-2 bg-gray-50 rounded-lg border border-gray-100">
-                <span className="text-gray-700 font-medium">{factor.category}</span>
-                <span className="font-bold text-blue-600">+{Math.round(factor.pointsAwarded)} pts</span>
+              <div key={idx} className="flex items-center justify-between text-sm p-2 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-100 dark:border-slate-700">
+                <span className="text-slate-700 dark:text-slate-300 font-medium">{factor.category}</span>
+                <span className="font-bold text-blue-600 dark:text-blue-400">+{Math.round(factor.pointsAwarded)} pts</span>
               </div>
             ))}
           </div>

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthGuard } from './components/AuthGuard';
 import { RoleGuard } from './components/RoleGuard';
 
@@ -20,38 +21,39 @@ import { WorkerDashboard } from './pages/worker/WorkerDashboard';
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <div className="min-h-screen bg-gray-50 flex flex-col font-sans text-gray-900 selection:bg-blue-100">
-          <Navigation />
-          <main className="flex-grow flex flex-col w-full relative z-0">
-            <Routes>
-              {/* Public Unauthenticated Routes */}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<PublicLogin />} />
-              <Route path="/officer-login" element={<OfficerLogin />} />
-              <Route path="/report" element={<ReportPage />} />
-              <Route path="/track" element={<TrackReport />} />
-              <Route path="/worker" element={<WorkerDashboard />} />
-              
-              {/* Public Dashboard (Protected) */}
-              <Route element={<AuthGuard />}>
-                <Route path="/dashboard" element={<MyReportsPage />} />
-                <Route path="/dashboard/:reportId" element={<CitizenReportDetail />} />
-              </Route>
-              
-              {/* Admin Dashboard (Role Protected) */}
-              <Route element={<RoleGuard allowedRoles={['ADMIN']} />}>
-                <Route path="/admin" element={<Dashboard />} />
-                <Route path="/admin/report/:id" element={<ReportDetails />} />
-                <Route path="/analytics" element={<Analytics />} />
-              </Route>
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 transition-colors duration-200">
+            <Navigation />
+            <main className="flex-1">
+              <Routes>
+                {/* PUBLIC ROUTES */}
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<PublicLogin />} />
+                <Route path="/officer-login" element={<OfficerLogin />} />
+                <Route path="/report" element={<ReportPage />} />
+                <Route path="/track" element={<TrackReport />} />
+                <Route path="/worker" element={<WorkerDashboard />} />
+                
+                {/* PROTECTED PUBLIC ROUTES */}
+                <Route element={<AuthGuard />}>
+                  <Route path="/dashboard" element={<MyReportsPage />} />
+                  <Route path="/dashboard/:reportId" element={<CitizenReportDetail />} />
+                </Route>
 
-            </Routes>
-          </main>
-        </div>
-      </BrowserRouter>
-    </AuthProvider>
+                {/* PROTECTED ADMIN ROUTES */}
+                <Route element={<RoleGuard allowedRoles={['ADMIN']} />}>
+                  <Route path="/admin" element={<Dashboard />} />
+                  <Route path="/admin/report/:id" element={<ReportDetails />} />
+                  <Route path="/analytics" element={<Analytics />} />
+                </Route>
+              </Routes>
+            </main>
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

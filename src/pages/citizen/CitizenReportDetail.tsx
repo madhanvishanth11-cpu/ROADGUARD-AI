@@ -62,22 +62,22 @@ export const CitizenReportDetail = () => {
 
   const getStatusColor = (status: string) => {
     switch(status) {
-      case 'REPORTED': return 'bg-gray-100 text-gray-800 border-gray-200';
-      case 'VERIFIED': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'REPORTED': return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700';
+      case 'VERIFIED': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 border-blue-200 dark:border-blue-800/50';
       case 'ASSIGNED': return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'IN_PROGRESS': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'RESOLVED': return 'bg-green-100 text-green-800 border-green-200';
-      case 'REJECTED': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'IN_PROGRESS': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800';
+      case 'RESOLVED': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800';
+      case 'REJECTED': return 'bg-red-100 dark:bg-red-900/30 text-red-800 border-red-200 dark:border-red-800';
+      default: return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700';
     }
   };
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-600 dark:text-blue-400" /></div>;
   if (errorMsg || !report) return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-900">
       <AlertTriangle className="w-12 h-12 text-red-500 mb-4" />
-      <h2 className="text-xl font-bold text-gray-900 mb-2">Access Denied</h2>
-      <p className="text-gray-500 mb-6">{errorMsg || "We couldn't load this report."}</p>
+      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Access Denied</h2>
+      <p className="text-slate-500 dark:text-slate-400 mb-6">{errorMsg || "We couldn't load this report."}</p>
       <Link to="/my-reports" className="px-6 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700">Back to My Reports</Link>
     </div>
   );
@@ -90,14 +90,14 @@ export const CitizenReportDetail = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 pb-20">
-      <Link to="/my-reports" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 mb-6 transition-colors">
+      <Link to="/my-reports" className="inline-flex items-center text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:text-blue-400 mb-6 transition-colors">
         <ArrowLeft className="w-4 h-4 mr-1" /> Back to My Reports
       </Link>
       
       {/* Top Status Card */}
       <div className={`mb-8 p-6 rounded-2xl border-2 shadow-sm ${getStatusColor(report.status).replace('text', 'text').replace('bg', 'bg').replace('border', 'border')}`}>
         <div className="flex items-start gap-4">
-          <div className="p-3 bg-white/50 rounded-xl">
+          <div className="p-3 bg-white dark:bg-slate-800/50 rounded-xl">
             {report.status === 'RESOLVED' ? <ShieldCheck className="w-8 h-8" /> : 
              report.status === 'REJECTED' ? <XCircle className="w-8 h-8" /> :
              <Clock className="w-8 h-8" />}
@@ -106,7 +106,7 @@ export const CitizenReportDetail = () => {
             <h1 className="text-2xl font-black">{report.status}</h1>
             <p className="font-medium mt-1 opacity-90">{getStatusExplanation(report.status)}</p>
             {report.status === 'REJECTED' && (
-              <div className="mt-4 p-4 bg-white/60 rounded-lg">
+              <div className="mt-4 p-4 bg-white dark:bg-slate-800/60 rounded-lg">
                 <p className="text-sm font-bold uppercase tracking-wider mb-1">Rejection Reason</p>
                 <p className="font-medium">{rejectReason}</p>
               </div>
@@ -121,8 +121,8 @@ export const CitizenReportDetail = () => {
           {report.status === 'RESOLVED' && resolvedImageUrl ? (
             <BeforeAfterComparison beforeImage={report.image_url} afterImage={resolvedImageUrl} />
           ) : (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-              <div className="h-72 bg-gray-100 relative">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+              <div className="h-72 bg-slate-100 dark:bg-slate-800 relative">
                 <img src={report.image_url} alt="Road damage" className="w-full h-full object-cover" />
                 <div className="absolute top-4 right-4">
                   <RiskScoreBadge score={report.risk_score} level={report.risk_level} />
@@ -131,16 +131,16 @@ export const CitizenReportDetail = () => {
               <div className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm text-gray-500 font-bold uppercase tracking-wider">Report ID</p>
-                    <p className="font-mono text-gray-900 font-bold">{report.id}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Report ID</p>
+                    <p className="font-mono text-slate-900 dark:text-white font-bold">{report.id}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-gray-500 font-bold uppercase tracking-wider">Reported On</p>
-                    <p className="font-medium text-gray-900">{new Date(report.created_at).toLocaleDateString()}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Reported On</p>
+                    <p className="font-medium text-slate-900 dark:text-white">{new Date(report.created_at).toLocaleDateString()}</p>
                   </div>
                 </div>
-                <div className="mt-4 flex items-start gap-2 text-gray-700">
-                  <MapPin className="w-5 h-5 flex-shrink-0 text-gray-400 mt-0.5" />
+                <div className="mt-4 flex items-start gap-2 text-slate-700 dark:text-slate-300">
+                  <MapPin className="w-5 h-5 flex-shrink-0 text-slate-400 dark:text-slate-500 mt-0.5" />
                   <p className="font-medium">{report.address || 'Location coordinates saved'}</p>
                 </div>
               </div>
@@ -162,8 +162,8 @@ export const CitizenReportDetail = () => {
         </div>
 
         <div>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-24">
-            <h3 className="font-bold text-gray-900 mb-6">Status Timeline</h3>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 p-6 sticky top-24">
+            <h3 className="font-bold text-slate-900 dark:text-white mb-6">Status Timeline</h3>
             <StatusTimeline history={history} />
           </div>
         </div>

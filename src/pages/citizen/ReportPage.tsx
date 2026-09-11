@@ -256,18 +256,18 @@ export const ReportPage = () => {
   // --- Success Screen ---
   if (submittedReportId) {
     return (
-      <div className="min-h-[calc(100vh-64px)] bg-gray-50 flex flex-col items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-sm text-center border border-gray-100">
-          <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+      <div className="min-h-[calc(100vh-64px)] bg-slate-50 dark:bg-slate-900 flex flex-col items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm text-center border border-slate-100 dark:border-slate-700">
+          <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Report Submitted Successfully</h2>
-          <p className="text-gray-500 mb-6">Your road damage report has been submitted successfully.</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Report Submitted Successfully</h2>
+          <p className="text-slate-500 dark:text-slate-400 mb-6">Your road damage report has been submitted successfully.</p>
           
-          <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 text-left mb-8 space-y-3">
-            <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-              <span className="text-gray-500 font-bold">Report ID</span>
-              <span className="font-mono font-black text-blue-600">{submittedReportId}</span>
+          <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 text-left mb-8 space-y-3">
+            <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-3">
+              <span className="text-slate-500 dark:text-slate-400 font-bold">Report ID</span>
+              <span className="font-mono font-black text-blue-600 dark:text-blue-400">{submittedReportId}</span>
             </div>
           </div>
           
@@ -275,7 +275,7 @@ export const ReportPage = () => {
             <Link to="/track" className="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors block text-center">
               Track Report
             </Link>
-            <Link to="/dashboard" className="w-full py-3 bg-white text-gray-700 border border-gray-200 rounded-lg font-bold hover:bg-gray-50 transition-colors block text-center">
+            <Link to="/dashboard" className="w-full py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg font-bold hover:bg-slate-50 dark:bg-slate-900 transition-colors block text-center">
               Back to Dashboard
             </Link>
           </div>
@@ -288,11 +288,11 @@ export const ReportPage = () => {
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Report Road Damage</h1>
-          <p className="text-gray-500 mt-2">Follow the steps below to report a pothole or road damage for AI assessment.</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Report Road Damage</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-2">Follow the steps below to report a pothole or road damage for AI assessment.</p>
         </div>
         <div className="self-start">
-          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${aiMode === 'remote' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-gray-100 text-gray-700 border-gray-300'}`}>
+          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${aiMode === 'remote' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/50' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600'}`}>
             <Activity className="w-3 h-3" />
             AI Mode: {aiMode === 'remote' ? 'REAL AI' : 'DEMO'}
           </span>
@@ -302,14 +302,14 @@ export const ReportPage = () => {
       <div className="space-y-8">
         
         {/* Step 1: Image Upload */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="bg-blue-100 text-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
             Upload Road Image
           </h2>
           
           {imageError && (
-            <div className="mb-4 bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg text-sm flex items-start gap-3">
+            <div className="mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 p-3 rounded-lg text-sm flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <p>{imageError}</p>
             </div>
@@ -321,31 +321,31 @@ export const ReportPage = () => {
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
-              className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-all ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:bg-gray-50 hover:border-blue-400'}`}
+              className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-all ${isDragging ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:bg-slate-900 hover:border-blue-400'}`}
             >
-              <UploadCloud className={`w-12 h-12 mx-auto mb-4 ${isDragging ? 'text-blue-500' : 'text-gray-400'}`} />
-              <p className="text-gray-700 font-medium text-lg mb-1">Drag and drop your image here</p>
-              <p className="text-sm text-gray-500 mb-4">or click to browse from your device</p>
+              <UploadCloud className={`w-12 h-12 mx-auto mb-4 ${isDragging ? 'text-blue-500' : 'text-slate-400 dark:text-slate-500'}`} />
+              <p className="text-slate-700 dark:text-slate-300 font-medium text-lg mb-1">Drag and drop your image here</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">or click to browse from your device</p>
               
               <div className="flex items-center justify-center gap-4 mt-6">
                 <button 
                   type="button" 
                   onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-                  className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-gray-50"
+                  className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-slate-50 dark:bg-slate-900"
                 >
                   <ImageIcon className="w-4 h-4" /> Browse
                 </button>
                 <button 
                   type="button" 
                   onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-                  className="px-4 py-2 bg-blue-50 border border-blue-100 text-blue-700 rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-blue-100 sm:hidden"
+                  className="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-blue-100 dark:bg-blue-900/30 sm:hidden"
                 >
                   <Camera className="w-4 h-4" /> Camera
                 </button>
               </div>
             </div>
           ) : (
-            <div className="relative rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
+            <div className="relative rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <div className="relative">
                 <img 
                   ref={imageRef}
@@ -358,7 +358,7 @@ export const ReportPage = () => {
                 {analysisResult?.boundingBoxes?.map((box, i) => (
                   <div 
                     key={i}
-                    className="absolute border-2 border-red-500 bg-red-500/20"
+                    className="absolute border-2 border-red-500 bg-red-50 dark:bg-red-900/200/20"
                     style={{
                       left: `${box.xmin * 100}%`,
                       top: `${box.ymin * 100}%`,
@@ -367,7 +367,7 @@ export const ReportPage = () => {
                     }}
                   >
                     {box.label && (
-                      <span className="absolute -top-6 left-[-2px] bg-red-500 text-white text-xs font-bold px-2 py-1 whitespace-nowrap">
+                      <span className="absolute -top-6 left-[-2px] bg-red-50 dark:bg-red-900/200 text-white text-xs font-bold px-2 py-1 whitespace-nowrap">
                         {box.label} {box.confidence ? `(${Math.round(box.confidence * 100)}%)` : ''}
                       </span>
                     )}
@@ -378,13 +378,13 @@ export const ReportPage = () => {
               <div className="absolute top-4 right-4 flex gap-2">
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="px-4 py-2 bg-white/90 backdrop-blur text-gray-900 rounded-lg font-medium text-sm flex items-center gap-2 shadow-sm hover:bg-white"
+                  className="px-4 py-2 bg-white dark:bg-slate-800/90 backdrop-blur text-slate-900 dark:text-white rounded-lg font-medium text-sm flex items-center gap-2 shadow-sm hover:bg-white dark:bg-slate-800"
                 >
                   <Camera className="w-4 h-4" /> Change
                 </button>
                 <button 
                   onClick={removeImage}
-                  className="p-2 bg-white/90 backdrop-blur text-red-600 rounded-lg shadow-sm hover:bg-red-50 hover:text-red-700"
+                  className="p-2 bg-white dark:bg-slate-800/90 backdrop-blur text-red-600 rounded-lg shadow-sm hover:bg-red-50 dark:bg-red-900/20 hover:text-red-700 dark:text-red-400"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -402,9 +402,9 @@ export const ReportPage = () => {
         </div>
 
         {/* Step 2: Location */}
-        <div className={`bg-white p-6 rounded-2xl shadow-sm border border-gray-100 transition-opacity ${!image ? 'opacity-50 pointer-events-none' : ''}`}>
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="bg-blue-100 text-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+        <div className={`bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 transition-opacity ${!image ? 'opacity-50 pointer-events-none' : ''}`}>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
             Detect My Location
           </h2>
           
@@ -413,7 +413,7 @@ export const ReportPage = () => {
               <button
                 onClick={handleGetLocation}
                 disabled={isLocating}
-                className="w-full sm:w-auto px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400"
+                className="w-full sm:w-auto px-6 py-3 bg-slate-900 dark:bg-slate-100 dark:text-slate-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400"
               >
                 {isLocating ? <Loader2 className="w-5 h-5 animate-spin" /> : <MapPin className="w-5 h-5" />}
                 {isLocating ? 'Getting location...' : 'Detect GPS Location'}
@@ -421,14 +421,14 @@ export const ReportPage = () => {
             </div>
 
             {locationError && (
-              <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg text-sm flex items-start gap-3">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 p-4 rounded-lg text-sm flex items-start gap-3">
                 <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <p>{locationError}</p>
               </div>
             )}
 
             {location && !locationError && (
-              <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex flex-col gap-1 w-full relative">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 px-4 py-3 rounded-lg flex flex-col gap-1 w-full relative">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 flex-shrink-0" />
                   <span className="font-bold">Location detected</span>
@@ -441,7 +441,7 @@ export const ReportPage = () => {
                     <div className="col-span-2 text-green-700/80">Accuracy: <span className="font-bold">±{Math.round(location.accuracy)}m</span></div>
                   )}
                   {address && (
-                    <div className="col-span-2 mt-1 text-xs bg-white/50 px-2 py-1 rounded inline-block w-max text-green-900 font-sans border border-green-200/50">
+                    <div className="col-span-2 mt-1 text-xs bg-white dark:bg-slate-800/50 px-2 py-1 rounded inline-block w-max text-green-900 font-sans border border-green-200 dark:border-green-800/50">
                       <MapIcon className="w-3 h-3 inline mr-1" />{address}
                     </div>
                   )}
@@ -450,7 +450,7 @@ export const ReportPage = () => {
             )}
 
             {(location || locationError) && (
-              <div className="h-64 w-full rounded-xl overflow-hidden border border-gray-200 shadow-inner mt-4 relative z-0">
+              <div className="h-64 w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-inner mt-4 relative z-0">
                 <MapContainer 
                   center={[location?.latitude || 13.0827, location?.longitude || 80.2707]} 
                   zoom={15} 
@@ -464,7 +464,7 @@ export const ReportPage = () => {
                     setPosition={handleMapClick} 
                   />
                 </MapContainer>
-                <div className="absolute top-2 right-2 z-[400] bg-white/90 backdrop-blur px-3 py-1.5 rounded-md text-xs font-bold text-blue-700 shadow border border-blue-100 flex items-center gap-1.5 cursor-pointer">
+                <div className="absolute top-2 right-2 z-[400] bg-white dark:bg-slate-800/90 backdrop-blur px-3 py-1.5 rounded-md text-xs font-bold text-blue-700 dark:text-blue-300 shadow border border-blue-100 dark:border-blue-800 flex items-center gap-1.5 cursor-pointer">
                   <MapPin className="w-3 h-3" /> Click map to set/adjust
                 </div>
               </div>
@@ -473,21 +473,21 @@ export const ReportPage = () => {
         </div>
 
         {/* Step 3: AI Analysis */}
-        <div className={`bg-white p-6 rounded-2xl shadow-sm border border-gray-100 transition-opacity ${(!image || !location) ? 'opacity-50 pointer-events-none' : ''}`}>
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="bg-blue-100 text-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+        <div className={`bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 transition-opacity ${(!image || !location) ? 'opacity-50 pointer-events-none' : ''}`}>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</span>
             Analyze Road
           </h2>
           
           {aiMode === 'demo' && (
-            <div className="mb-4 bg-blue-50 border border-blue-200 text-blue-700 p-3 rounded-lg text-sm flex items-start gap-3">
+            <div className="mb-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 text-blue-700 dark:text-blue-300 p-3 rounded-lg text-sm flex items-start gap-3">
               <Info className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <p>Demo AI — connect a pothole detection model for production.</p>
             </div>
           )}
 
           {analysisError && (
-            <div className="mb-4 bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg text-sm flex items-start gap-3">
+            <div className="mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 p-4 rounded-lg text-sm flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <p>{analysisError}</p>
             </div>
@@ -497,7 +497,7 @@ export const ReportPage = () => {
             <button
               onClick={handleAnalyzeImage}
               disabled={isAnalyzing}
-              className="w-full px-6 py-4 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg font-bold text-lg hover:bg-blue-100 transition-colors flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full px-6 py-4 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 rounded-lg font-bold text-lg hover:bg-blue-100 dark:bg-blue-900/30 transition-colors flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isAnalyzing ? <Loader2 className="w-6 h-6 animate-spin" /> : <Activity className="w-6 h-6" />}
               {isAnalyzing ? 'Analyzing road image...' : 'Analyze Road'}
@@ -539,11 +539,11 @@ export const ReportPage = () => {
                   isDemo={aiMode === 'demo'}
                 />
               ) : (
-                <div className="border border-green-200 rounded-xl overflow-hidden bg-green-50 p-6 text-center">
+                <div className="border border-green-200 dark:border-green-800 rounded-xl overflow-hidden bg-green-50 dark:bg-green-900/20 p-6 text-center">
                   <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                  <h3 className="font-bold text-green-800 text-lg mb-1">{analysisResult.explanation || 'No pothole detected.'}</h3>
+                  <h3 className="font-bold text-green-800 dark:text-green-300 text-lg mb-1">{analysisResult.explanation || 'No pothole detected.'}</h3>
                   <p className="text-green-700 text-sm">Confidence: {analysisResult.confidence}%</p>
-                  <p className="text-gray-600 mt-4 text-sm">The AI did not identify critical road damage in this image. Submission is disabled.</p>
+                  <p className="text-slate-600 dark:text-slate-400 mt-4 text-sm">The AI did not identify critical road damage in this image. Submission is disabled.</p>
                 </div>
               )}
             </div>
@@ -552,7 +552,7 @@ export const ReportPage = () => {
 
         {/* Step 4: Submit */}
         {submitError && (
-          <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg text-sm flex items-start gap-3">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 p-4 rounded-lg text-sm flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
             <p>{submitError}</p>
           </div>
@@ -582,7 +582,7 @@ export const ReportPage = () => {
           <button
             onClick={() => handleSubmit(false)}
             disabled={!analysisResult?.potholeDetected || isSubmitting || (duplicateWarning && !isSubmitting)}
-            className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed shadow-md hover:shadow-lg disabled:shadow-none"
+            className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 disabled:bg-gray-300 disabled:text-slate-500 dark:text-slate-400 disabled:cursor-not-allowed shadow-md hover:shadow-lg disabled:shadow-none"
           >
             {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" /> : <ArrowRight className="w-6 h-6" />}
             {isSubmitting ? 'Submitting to Authority...' : 'Submit Report'}
