@@ -138,8 +138,8 @@ export const MyReportsPage = () => {
 
                 <div className="mt-5 pt-5 border-t border-slate-100 dark:border-[#2A2A2A]">
                   <button 
-                    onClick={() => navigate(`/my-reports/${report.id}`)}
-                    className="w-full flex items-center justify-between text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-50 dark:bg-blue-900/20 px-4 py-2.5 rounded-xl transition-colors"
+                    onClick={() => navigate(`/track?reportId=${report.id}`)}
+                    className="w-full flex items-center justify-between text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-50 dark:hover:bg-[#151515] px-4 py-2.5 rounded-xl transition-colors cursor-pointer"
                   >
                     Track Report Progress
                     <ChevronRight className="w-5 h-5" />

@@ -1,10 +1,10 @@
 import { useState, useEffect, Component } from 'react';
 import type { ErrorInfo, ReactNode } from 'react';
-import { Search, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Search, Loader2, CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
 import { getReportById, getReports } from '../../services/db/api';
 import type { Report } from '../../types';
 import { useAuth } from '../../contexts/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 // ---------------------------------------------------------
 // Error Boundary to prevent white screen
@@ -49,12 +49,21 @@ class TrackReportErrorBoundary extends Component<EBProps, EBState> {
 // ---------------------------------------------------------
 const TrackReportContent = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   
   const [reportId, setReportId] = useState('');
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<Report | null>(null);
   const [error, setError] = useState('');
   const [myReports, setMyReports] = useState<Report[]>([]);
+
+  useEffect(() => {
+    const idFromUrl = searchParams.get('reportId');
+    if (idFromUrl) {
+      handleTrackSubmit(idFromUrl);
+    }
+  }, [searchParams]);
 
   // Automatically fetch reports for "Demo Citizen"
   useEffect(() => {
@@ -188,6 +197,16 @@ const TrackReportContent = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 md:py-12 min-h-screen">
+      <div className="mb-6">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#111111] border border-slate-200 dark:border-[#2A2A2A] text-slate-800 dark:text-white rounded-lg hover:bg-slate-50 dark:hover:bg-[#151515] transition-colors font-medium text-sm shadow-sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Dashboard
+        </button>
+      </div>
+
       <div className="text-center mb-8">
         <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-2">Track Your Report</h1>
         <p className="text-slate-600 dark:text-[#A1A1AA]">Enter your Report ID to check the current status and repair progress.</p>
