@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Menu, X } from 'lucide-react';
-import { NotificationCenter } from './NotificationCenter';
 
 export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -22,12 +21,16 @@ export const Navigation = () => {
             </Link>
           </div>
           
-          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Dashboard</Link>
-            <Link to="/analytics" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Analytics</Link>
-            <Link to="/report" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Report Damage</Link>
-            <Link to="/my-reports" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">My Reports</Link>
-            <NotificationCenter />
+          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4 lg:space-x-6">
+            <Link to="/" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Dashboard</Link>
+            <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
+            <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
+            
+            <div className="h-4 w-px bg-gray-300 mx-2"></div>
+            
+            {/* Internal tools links for easy testing */}
+            <Link to="/officer" className="text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded text-xs font-bold transition-colors">Officer Portal</Link>
+            <Link to="/worker" className="text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded text-xs font-bold transition-colors">Worker App</Link>
           </div>
 
           <div className="flex items-center sm:hidden">
@@ -44,10 +47,13 @@ export const Navigation = () => {
       {isMobileMenuOpen && (
         <div className="sm:hidden border-t border-gray-100">
           <div className="pt-2 pb-3 space-y-1 px-4 bg-white shadow-xl">
-            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Dashboard</Link>
-            <Link to="/analytics" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Analytics</Link>
+            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Public Dashboard</Link>
             <Link to="/report" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Report Damage</Link>
-            <Link to="/my-reports" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">My Reports</Link>
+            <Link to="/track" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Track Report</Link>
+            <div className="border-t border-gray-100 my-2 pt-2">
+              <Link to="/officer" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-slate-700 hover:bg-slate-50 rounded-md">Officer Portal</Link>
+              <Link to="/worker" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-blue-700 hover:bg-blue-50 rounded-md">Worker App</Link>
+            </div>
           </div>
         </div>
       )}

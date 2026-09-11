@@ -1,19 +1,8 @@
 export type PriorityLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
-export type ReportStatus = 'REPORTED' | 'VERIFIED' | 'ASSIGNED' | 'IN_PROGRESS' | 'RESOLVED' | 'REJECTED';
-export type UserRole = 'CITIZEN' | 'AUTHORITY';
-
-export interface UserProfile {
-  id: string;
-  full_name: string;
-  email: string;
-  role: UserRole;
-  created_at: string;
-  updated_at: string;
-}
+export type ReportStatus = 'SUBMITTED' | 'UNDER_REVIEW' | 'ASSIGNED' | 'IN_PROGRESS' | 'PENDING_VERIFICATION' | 'REWORK_REQUIRED' | 'RESOLVED' | 'REJECTED';
 
 export interface Report {
-  id: string;
-  user_id?: string;
+  id: string; // Used as the RG-2026-00001 format
   created_at: string;
   latitude: number;
   longitude: number;
@@ -27,7 +16,7 @@ export interface Report {
   estimated_size: string;
   risk_score: number;
   risk_level: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
-  risk_factors: any; // JSON containing breakdown
+  risk_factors: any;
   risk_explanation: string[];
   traffic_level: 'LOW' | 'MEDIUM' | 'HIGH';
   location_type: string;
@@ -35,17 +24,41 @@ export interface Report {
   nearby_reports_count: number;
   priority: PriorityLevel;
   status: ReportStatus;
-  repair_image_url?: string;
 }
 
-export interface AuthorityAssignment {
+export interface Worker {
+  id: string;
+  name: string;
+  department: string;
+  team: string;
+  phone?: string;
+  status: 'AVAILABLE' | 'BUSY' | 'OFF_DUTY';
+  created_at?: string;
+}
+
+export interface ReportAssignment {
   id: string;
   report_id: string;
+  worker_id: string;
   department: string;
-  zone: string;
   team: string;
-  notes?: string;
+  assigned_by: string; // e.g. 'Officer'
   assigned_at: string;
+  expected_completion: string; // e.g. '1 Day'
+  status: ReportStatus;
+  worker?: Worker; // Joined relation
+}
+
+export interface RepairUpdate {
+  id: string;
+  report_id: string;
+  worker_id: string;
+  status: ReportStatus;
+  before_image_url?: string;
+  after_image_url?: string;
+  completion_notes?: string;
+  completed_at: string;
+  created_at?: string;
 }
 
 export interface StatusHistory {
@@ -54,15 +67,4 @@ export interface StatusHistory {
   status: ReportStatus;
   notes?: string;
   updated_at: string;
-}
-
-export interface Notification {
-  id: string;
-  user_id: string;
-  report_id: string;
-  title: string;
-  message: string;
-  type: 'REPORT_CREATED' | 'REPORT_VERIFIED' | 'REPAIR_ASSIGNED' | 'REPAIR_STARTED' | 'REPORT_RESOLVED' | 'REPORT_REJECTED';
-  is_read: boolean;
-  created_at: string;
 }

@@ -1,15 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { ReportPage } from './pages/citizen/ReportPage';
+import { TrackReport } from './pages/citizen/TrackReport';
 import { MyReportsPage } from './pages/citizen/MyReportsPage';
 import { CitizenReportDetail } from './pages/citizen/CitizenReportDetail';
-import { PresentationMode } from './pages/public/PresentationMode';
-import { PresentationDeck } from './pages/public/PresentationDeck';
-import { PromoReel } from './pages/public/PromoReel';
 import { Dashboard } from './pages/authority/Dashboard';
 import { Analytics } from './pages/authority/Analytics';
-import { ReportDetails } from './pages/authority/ReportDetails';
-import { LandingPage } from './pages/citizen/LandingPage'; // Kept in case it's linked elsewhere, but Dashboard is home
+import { OfficerDashboard } from './pages/officer/OfficerDashboard';
+import { WorkerDashboard } from './pages/worker/WorkerDashboard';
 
 function App() {
   return (
@@ -20,21 +18,16 @@ function App() {
           <Routes>
             {/* Public Core Routes */}
             <Route path="/" element={<Dashboard />} />
-            <Route path="/landing" element={<LandingPage />} />
             <Route path="/report" element={<ReportPage />} />
+            <Route path="/track" element={<TrackReport />} />
             <Route path="/my-reports" element={<MyReportsPage />} />
             <Route path="/my-reports/:reportId" element={<CitizenReportDetail />} />
             <Route path="/analytics" element={<Analytics />} />
             
-            {/* Kept original authority routes mapped to the same components so existing links don't break */}
-            <Route path="/authority" element={<Dashboard />} />
-            <Route path="/authority/analytics" element={<Analytics />} />
-            <Route path="/authority/report/:id" element={<ReportDetails />} />
+            {/* New Management Dashboards */}
+            <Route path="/officer" element={<OfficerDashboard />} />
+            <Route path="/worker" element={<WorkerDashboard />} />
 
-            {/* Presentation Routes */}
-            <Route path="/demo" element={<PresentationMode />} />
-            <Route path="/presentation" element={<PresentationDeck />} />
-            <Route path="/reel" element={<PromoReel />} />
           </Routes>
         </main>
       </div>

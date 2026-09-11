@@ -231,7 +231,7 @@ export const ReportPage = () => {
         weather_risk: 'LOW',
         nearby_reports_count: reportFreq,
         priority: riskEngineResult.level,
-        status: 'REPORTED'
+        status: 'SUBMITTED'
       });
       
       // Save to local storage so the citizen can track it in /my-reports
