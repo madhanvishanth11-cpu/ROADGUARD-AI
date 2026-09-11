@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { supabase } from '../services/db/supabaseClient';
 import type { UserProfile } from '../types';
 
 interface AuthContextType {
@@ -8,14 +7,13 @@ interface AuthContextType {
   profile: UserProfile | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string, fullName: string) => Promise<void>;
-  signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
   updateProfile: (fullName: string) => Promise<void>;
-  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+const DEMO_USER_KEY = 'roadguard_demo_auth';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any>(null);
@@ -23,123 +21,62 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      // Supabase Auth Flow
-      if (!supabase) {
-        setLoading(false);
-        return;
-      }
-      
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        await loadProfile(session.user.id);
+    const initializeAuth = () => {
+      const storedUser = localStorage.getItem(DEMO_USER_KEY);
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+        setProfile({
+          id: parsedUser.id,
+          full_name: 'Demo Citizen',
+          email: parsedUser.email,
+          role: 'CITIZEN',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
       }
       setLoading(false);
-
-      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          await loadProfile(session.user.id);
-        } else {
-          setProfile(null);
-        }
-        setLoading(false);
-      });
-
-      return () => {
-        subscription.unsubscribe();
-      };
     };
 
     initializeAuth();
   }, []);
 
-  const loadProfile = async (userId: string) => {
-    if (!supabase) return;
-    try {
-      const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
-      if (!error && data) {
-        setProfile(data as UserProfile);
-      }
-    } catch (err) {
-      console.error('Failed to load profile', err);
-    }
-  };
-
   const signIn = async (email: string, password: string) => {
-    if (!supabase) throw new Error('Supabase client not initialized');
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) throw error;
-  };
+    // Simulate network delay
+    await new Promise(r => setTimeout(r, 800));
 
-  const signUp = async (email: string, password: string, fullName: string) => {
-    if (!supabase) throw new Error('Supabase client not initialized');
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-          role: 'CITIZEN'
-        }
-      }
-    });
-    if (error) throw error;
-    
-    // Automatically create profile on successful sign up if trigger isn't set up
-    if (data.user) {
-      const { error: profileError } = await supabase.from('profiles').insert({
-        id: data.user.id,
-        full_name: fullName,
-        email: email,
-        role: 'CITIZEN'
+    if (email === 'demo@roadguard.ai' && password === 'RoadGuard@123') {
+      const demoUser = { id: 'demo-citizen-123', email };
+      localStorage.setItem(DEMO_USER_KEY, JSON.stringify(demoUser));
+      setUser(demoUser);
+      setProfile({
+        id: demoUser.id,
+        full_name: 'Demo Citizen',
+        email: demoUser.email,
+        role: 'CITIZEN',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       });
-      if (!profileError) {
-        await loadProfile(data.user.id);
-      }
+      return;
     }
-  };
-
-  const signInWithGoogle = async () => {
-    if (!supabase) throw new Error('Supabase client not initialized');
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`
-      }
-    });
-    if (error) throw error;
+    
+    throw new Error('Invalid demo email or password.');
   };
 
   const signOut = async () => {
-    if (!supabase) return;
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    localStorage.removeItem(DEMO_USER_KEY);
+    setUser(null);
+    setProfile(null);
   };
 
   const updateProfile = async (fullName: string) => {
-    if (!user) throw new Error('Not authenticated');
-    if (!supabase) throw new Error('Supabase client not initialized');
-
-    const { error } = await supabase.from('profiles').update({
-      full_name: fullName,
-      updated_at: new Date().toISOString()
-    }).eq('id', user.id);
-    if (error) throw error;
-    await loadProfile(user.id);
-  };
-
-  const resetPassword = async (email: string) => {
-    if (!supabase) throw new Error('Supabase client not initialized');
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
-    if (error) throw error;
+    if (profile) {
+      setProfile({ ...profile, full_name: fullName });
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, signIn, signUp, signInWithGoogle, signOut, updateProfile, resetPassword }}>
+    <AuthContext.Provider value={{ user, profile, loading, signIn, signOut, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

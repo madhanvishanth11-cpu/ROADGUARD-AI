@@ -13,10 +13,7 @@ import { Dashboard } from './pages/authority/Dashboard';
 import { Analytics } from './pages/authority/Analytics';
 import { ReportDetails } from './pages/authority/ReportDetails';
 import { Login } from './pages/auth/Login';
-import { Signup } from './pages/auth/Signup';
-import { ForgotPassword } from './pages/auth/ForgotPassword';
 import { Unauthorized } from './pages/auth/Unauthorized';
-import { AuthCallback } from './pages/auth/AuthCallback';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthGuard } from './components/AuthGuard';
 import { RoleGuard } from './components/RoleGuard';
@@ -36,10 +33,7 @@ function App() {
               <Route path="/reel" element={<PromoReel />} />
               <Route path="/report" element={<ReportPage />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
-              <Route path="/auth/callback" element={<AuthCallback />} />
 
               {/* Citizen / Authenticated Routes */}
               <Route element={<AuthGuard />}>
