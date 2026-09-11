@@ -33,31 +33,36 @@ export const Navigation = () => {
             </Link>
           </div>
           
-          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4 lg:space-x-6">
+          <div className="hidden sm:flex flex-1 items-center justify-between">
             
             {/* PUBLIC NAVIGATION */}
             {!user && (
               <>
-                <Link to="/" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Home</Link>
-                <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
-                <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
-                <div className="h-4 w-px bg-gray-300 mx-2"></div>
-                <Link to="/login" className="text-blue-600 font-bold hover:text-blue-700 px-2 py-2 text-sm transition-colors">Public Sign In</Link>
-                <Link to="/officer-login" className="text-slate-600 font-bold hover:text-slate-800 px-2 py-2 text-sm transition-colors">Officer Portal</Link>
+                <div className="flex-1 flex justify-center space-x-6">
+                  <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Dashboard</Link>
+                  <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
+                  <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Link to="/login" className="text-blue-600 font-bold hover:bg-blue-50 px-4 py-2 text-sm rounded-lg border border-blue-200 transition-colors">Public Sign In</Link>
+                  <Link to="/officer-login" className="bg-slate-800 text-white font-bold hover:bg-slate-900 px-4 py-2 text-sm rounded-lg transition-colors">Officer Portal</Link>
+                </div>
               </>
             )}
 
             {/* LOGGED IN - PUBLIC */}
             {user?.role === 'PUBLIC' && (
               <>
-                <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Dashboard</Link>
-                <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
-                <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
-                <div className="flex items-center gap-4 ml-4 pl-4 border-l border-gray-200">
-                  <div className="flex items-center gap-2 text-sm font-bold text-gray-700">
-                    <UserIcon className="w-4 h-4" /> {user.name}
+                <div className="flex-1 flex justify-center space-x-6">
+                  <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Dashboard</Link>
+                  <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
+                  <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 text-sm font-bold text-gray-700 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                    <UserIcon className="w-4 h-4 text-blue-600" /> {user.name}
                   </div>
-                  <button onClick={handleLogout} className="text-red-600 hover:text-red-700 flex items-center gap-1 px-2 py-2 text-sm font-bold transition-colors">
+                  <button onClick={handleLogout} className="text-red-600 hover:bg-red-50 flex items-center gap-1 px-3 py-1.5 text-sm font-bold rounded-lg transition-colors">
                     <LogOut className="w-4 h-4" /> Logout
                   </button>
                 </div>
@@ -67,13 +72,15 @@ export const Navigation = () => {
             {/* LOGGED IN - ADMIN */}
             {user?.role === 'ADMIN' && (
               <>
-                <Link to="/admin" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Admin Dashboard</Link>
-                <Link to="/analytics" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Analytics</Link>
-                <div className="flex items-center gap-4 ml-4 pl-4 border-l border-gray-200">
-                  <div className="flex items-center gap-2 text-sm font-bold text-slate-800 bg-slate-100 px-3 py-1 rounded-full">
-                    <Shield className="w-3 h-3 text-blue-600" /> {user.name}
+                <div className="flex-1 flex justify-center space-x-6">
+                  <Link to="/admin" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Admin Dashboard</Link>
+                  <Link to="/analytics" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Analytics</Link>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 text-sm font-bold text-slate-800 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+                    <Shield className="w-4 h-4 text-blue-600" /> {user.name}
                   </div>
-                  <button onClick={handleLogout} className="text-red-600 hover:text-red-700 flex items-center gap-1 px-2 py-2 text-sm font-bold transition-colors">
+                  <button onClick={handleLogout} className="text-red-600 hover:bg-red-50 flex items-center gap-1 px-3 py-1.5 text-sm font-bold rounded-lg transition-colors">
                     <LogOut className="w-4 h-4" /> Logout
                   </button>
                 </div>
@@ -99,9 +106,10 @@ export const Navigation = () => {
             
             {!user && (
               <>
-                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Home</Link>
+                <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Dashboard</Link>
                 <Link to="/report" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Report Damage</Link>
                 <Link to="/track" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Track Report</Link>
+                <div className="border-t border-gray-100 my-2 pt-2"></div>
                 <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-blue-600 hover:bg-blue-50 rounded-md">Public Sign In</Link>
                 <Link to="/officer-login" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-slate-700 hover:bg-slate-50 rounded-md">Officer Portal</Link>
               </>
