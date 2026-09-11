@@ -6,7 +6,6 @@ import { analyzeRoadImage, getAiProviderMode } from '../../services/ai/roadDamag
 import { createReport, uploadReportImage, getReports } from '../../services/db/api';
 import type { AIAnalysisResult } from '../../types/ai';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
 import { AIResultCard } from '../../components/AIResultCard';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
@@ -29,7 +28,6 @@ const LocationMarker = ({ position, setPosition }: { position: L.LatLng | null, 
 };
 
 export const ReportPage = () => {
-  const { user } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const aiMode = getAiProviderMode();
@@ -233,8 +231,7 @@ export const ReportPage = () => {
         weather_risk: 'LOW',
         nearby_reports_count: reportFreq,
         priority: riskEngineResult.level,
-        status: 'REPORTED',
-        ...(user?.id ? { user_id: user.id } : {})
+        status: 'REPORTED'
       });
       
       // Save to local storage so the citizen can track it in /my-reports
