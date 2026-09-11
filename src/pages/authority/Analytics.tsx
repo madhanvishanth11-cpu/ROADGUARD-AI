@@ -300,7 +300,7 @@ export const Analytics = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
         {/* Severity Distribution */}
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2"><AlertTriangle className="w-5 h-5 text-gray-400"/> Severity Distribution</h3>
@@ -364,7 +364,7 @@ export const Analytics = () => {
         ) : <p className="text-center text-gray-400 italic py-10">No data available.</p>}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Hotspots Map */}
         <div className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2"><MapIcon className="w-5 h-5 text-gray-400"/> Damage Hotspots</h3>

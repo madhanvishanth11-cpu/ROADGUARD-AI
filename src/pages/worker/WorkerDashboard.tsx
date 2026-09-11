@@ -105,7 +105,7 @@ export const WorkerDashboard = () => {
   if (loading && !currentWorker) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-600 dark:text-blue-400" /></div>;
 
   return (
-    <div className="bg-slate-100 dark:bg-slate-800 min-h-screen font-sans pb-12">
+    <div className="bg-slate-100 dark:bg-[#111111] min-h-screen font-sans pb-12">
       <header className="bg-blue-700 text-white p-4 shadow-md sticky top-0 z-50">
         <div className="max-w-xl mx-auto flex justify-between items-center">
           <div>
@@ -129,11 +129,11 @@ export const WorkerDashboard = () => {
         
         {!selectedTask ? (
           <>
-            <h2 className="text-xl font-black text-slate-800 dark:text-slate-200 mb-4">My Tasks</h2>
+            <h2 className="text-xl font-black text-slate-800 dark:text-white mb-4">My Tasks</h2>
             
             <div className="space-y-4">
               {tasks.filter(t => t.status !== 'RESOLVED' && t.status !== 'PENDING_VERIFICATION').map(task => (
-                <div key={task.id} className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 active:scale-[0.98] transition-transform" onClick={() => handleSelectTask(task)}>
+                <div key={task.id} className="bg-white dark:bg-[#111111] rounded-xl shadow-sm border border-slate-200 dark:border-[#2A2A2A] p-4 active:scale-[0.98] transition-transform" onClick={() => handleSelectTask(task)}>
                   <div className="flex justify-between items-start mb-2">
                     <span className="font-mono font-bold text-slate-900 dark:text-white">{task.report_id}</span>
                     <span className={`px-2 py-1 text-[10px] font-bold rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300`}>{task.status}</span>
@@ -146,7 +146,7 @@ export const WorkerDashboard = () => {
               ))}
 
               {tasks.filter(t => t.status !== 'RESOLVED' && t.status !== 'PENDING_VERIFICATION').length === 0 && (
-                <div className="text-center p-8 text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 rounded-xl border border-dashed border-slate-300 dark:border-slate-600">
+                <div className="text-center p-6 text-slate-500 dark:text-[#A1A1AA] bg-white dark:bg-[#111111] rounded-xl border border-dashed border-slate-300 dark:border-[#2A2A2A]">
                   <CheckCircle className="w-12 h-12 mx-auto text-green-300 mb-2" />
                   <p>You have no active tasks!</p>
                 </div>
@@ -154,21 +154,21 @@ export const WorkerDashboard = () => {
             </div>
           </>
         ) : (
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
-            <div className="bg-slate-100 p-3 flex justify-between items-center border-b border-slate-200 dark:border-slate-700">
+          <div className="bg-white dark:bg-[#111111] rounded-xl shadow-sm border border-slate-200 dark:border-[#2A2A2A] overflow-hidden">
+            <div className="bg-slate-100 p-3 flex justify-between items-center border-b border-slate-200 dark:border-[#2A2A2A]">
               <button onClick={() => setSelectedTask(null)} className="text-blue-600 dark:text-blue-400 text-sm font-bold">← Back</button>
               <span className="font-mono text-sm font-bold">{selectedTask.report_id}</span>
             </div>
             
             <div className="p-4">
               {!reportDetails ? (
-                <div className="flex justify-center p-8"><Loader2 className="w-6 h-6 animate-spin text-blue-600 dark:text-blue-400"/></div>
+                <div className="flex justify-center p-6"><Loader2 className="w-6 h-6 animate-spin text-blue-600 dark:text-blue-400"/></div>
               ) : (
                 <>
-                  <img src={reportDetails.image_url} alt="Damage" className="w-full h-48 object-cover rounded-lg mb-4 bg-slate-100 dark:bg-slate-800" />
+                  <img src={reportDetails.image_url} alt="Damage" className="w-full h-48 object-cover rounded-lg mb-4 bg-slate-100 dark:bg-[#111111]" />
                   <div className="mb-4">
-                    <p className="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold mb-1">Location</p>
-                    <p className="text-sm bg-slate-50 dark:bg-slate-900 p-2 rounded border border-slate-100 dark:border-slate-700"><MapPin className="w-3 h-3 inline mr-1 text-slate-400 dark:text-slate-500"/>{reportDetails.address}</p>
+                    <p className="text-xs text-slate-500 dark:text-[#A1A1AA] uppercase font-bold mb-1">Location</p>
+                    <p className="text-sm bg-slate-50 dark:bg-black p-2 rounded border border-slate-100 dark:border-[#2A2A2A]"><MapPin className="w-3 h-3 inline mr-1 text-slate-400 dark:text-[#A1A1AA]"/>{reportDetails.address}</p>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4 mb-6">
@@ -176,39 +176,39 @@ export const WorkerDashboard = () => {
                       <p className="text-[10px] text-red-500 uppercase font-bold">Priority</p>
                       <p className="text-sm font-bold text-red-700 dark:text-red-400">{reportDetails.priority}</p>
                     </div>
-                    <div className="bg-slate-50 dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-700">
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Severity</p>
+                    <div className="bg-slate-50 dark:bg-black p-2 rounded border border-slate-200 dark:border-[#2A2A2A]">
+                      <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA] uppercase font-bold">Severity</p>
                       <p className="text-sm font-bold text-slate-900 dark:text-white">{reportDetails.severity}</p>
                     </div>
                   </div>
 
                   {/* Submission Form */}
-                  <div className="border-t border-slate-200 dark:border-slate-700 pt-6">
+                  <div className="border-t border-slate-200 dark:border-[#2A2A2A] pt-6">
                     <h3 className="font-bold text-slate-900 dark:text-white mb-4">Complete Repair</h3>
                     
                     <div className="mb-4">
-                      <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Upload After Photo (Required)</label>
+                      <label className="block text-sm font-bold text-slate-700 dark:text-[#A1A1AA] mb-2">Upload After Photo (Required)</label>
                       {!imagePreview ? (
                         <div 
                           onClick={() => fileInputRef.current?.click()}
-                          className="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 dark:bg-slate-900"
+                          className="border-2 border-dashed border-slate-300 dark:border-[#2A2A2A] rounded-xl p-6 text-center cursor-pointer hover:bg-slate-50 dark:bg-black"
                         >
-                          <Camera className="w-8 h-8 text-slate-400 dark:text-slate-500 mx-auto mb-2" />
-                          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Tap to open camera</p>
+                          <Camera className="w-8 h-8 text-slate-400 dark:text-[#A1A1AA] mx-auto mb-2" />
+                          <p className="text-sm font-medium text-slate-600 dark:text-[#A1A1AA]">Tap to open camera</p>
                         </div>
                       ) : (
                         <div className="relative">
                           <img src={imagePreview} className="w-full h-48 object-cover rounded-xl" alt="Preview" />
-                          <button onClick={() => {setImage(null); setImagePreview(null);}} className="absolute top-2 right-2 p-1 bg-white dark:bg-slate-800 rounded-full text-red-600 dark:text-red-400 shadow"><X className="w-4 h-4"/></button>
+                          <button onClick={() => {setImage(null); setImagePreview(null);}} className="absolute top-2 right-2 p-1 bg-white dark:bg-[#111111] rounded-full text-red-600 dark:text-red-400 shadow"><X className="w-4 h-4"/></button>
                         </div>
                       )}
                       <input type="file" accept="image/*" capture="environment" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
                     </div>
 
                     <div className="mb-6">
-                      <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Work Completion Notes</label>
+                      <label className="block text-sm font-bold text-slate-700 dark:text-[#A1A1AA] mb-2">Work Completion Notes</label>
                       <textarea 
-                        className="w-full border border-slate-300 dark:border-slate-600 rounded-lg p-3 text-sm outline-none focus:border-blue-500" 
+                        className="w-full border border-slate-300 dark:border-[#2A2A2A] rounded-lg p-3 text-sm outline-none focus:border-blue-500" 
                         rows={3} 
                         placeholder="e.g. Pothole filled and leveled."
                         value={notes}

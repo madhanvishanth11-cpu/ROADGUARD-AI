@@ -93,15 +93,15 @@ export const ReportDetails = () => {
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-600 dark:text-blue-400" /></div>;
-  if (!report) return <div className="p-8 text-center text-red-500">Report not found</div>;
+  if (!report) return <div className="p-6 text-center text-red-500">Report not found</div>;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <button onClick={() => navigate('/admin')} className="flex items-center text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:text-blue-400 mb-6 font-bold">
+      <button onClick={() => navigate('/admin')} className="flex items-center text-slate-500 dark:text-[#A1A1AA] hover:text-blue-600 dark:text-blue-400 mb-6 font-bold">
         <ArrowLeft className="w-5 h-5 mr-1" /> Back to Dashboard
       </button>
 
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
+      <div className="bg-white dark:bg-[#111111] rounded-2xl shadow-sm border border-slate-200 dark:border-[#2A2A2A] overflow-hidden mb-8">
         <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/2">
             <img src={report.image_url} alt="Road damage" className="w-full h-[400px] object-cover" />
@@ -109,14 +109,14 @@ export const ReportDetails = () => {
           <div className="p-6 md:w-1/2 flex flex-col justify-center">
             <div className="flex justify-between items-start mb-4">
               <div>
-                <p className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase">Report ID</p>
+                <p className="text-sm font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Report ID</p>
                 <h1 className="text-2xl font-mono font-black text-slate-900 dark:text-white">{report.id}</h1>
               </div>
               <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 font-bold text-sm rounded-full">{report.status}</span>
             </div>
 
-            <p className="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-6 font-medium">
-              <MapPin className="w-5 h-5 text-slate-400 dark:text-slate-500" /> {report.address}
+            <p className="flex items-center gap-2 text-slate-600 dark:text-[#A1A1AA] mb-6 font-medium">
+              <MapPin className="w-5 h-5 text-slate-400 dark:text-[#A1A1AA]" /> {report.address}
             </p>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
@@ -124,47 +124,47 @@ export const ReportDetails = () => {
                 <p className="text-xs font-bold text-red-500 uppercase tracking-wider mb-1">Priority</p>
                 <p className="text-lg font-black text-red-700 dark:text-red-400">{report.priority}</p>
               </div>
-              <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Severity</p>
+              <div className="bg-slate-50 dark:bg-black p-4 rounded-xl border border-slate-200 dark:border-[#2A2A2A]">
+                <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-wider mb-1">Severity</p>
                 <p className="text-lg font-black text-slate-900 dark:text-white">{report.severity} ({report.risk_score})</p>
               </div>
             </div>
 
-            <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+            <p className="text-sm text-slate-500 dark:text-[#A1A1AA] flex items-center gap-2">
               <Clock className="w-4 h-4" /> Submitted: {new Date(report.created_at).toLocaleString()}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         
         {/* Quick Actions */}
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+        <div className="bg-white dark:bg-[#111111] p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-[#2A2A2A]">
           <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
             <ShieldAlert className="w-5 h-5 text-blue-600 dark:text-blue-400" /> Admin Actions
           </h2>
           <div className="flex flex-wrap gap-2 mb-6">
             <button onClick={() => handleUpdateStatus('UNDER_REVIEW')} className="px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 font-bold rounded-lg text-sm hover:bg-yellow-200">Mark Under Review</button>
-            <button onClick={() => handleUpdateStatus('REJECTED')} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-lg text-sm hover:bg-gray-200">Reject Report</button>
+            <button onClick={() => handleUpdateStatus('REJECTED')} className="px-4 py-2 bg-slate-100 dark:bg-[#111111] text-slate-700 dark:text-[#A1A1AA] font-bold rounded-lg text-sm hover:bg-gray-200">Reject Report</button>
             <button onClick={() => handleUpdateStatus('IN_PROGRESS')} className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 font-bold rounded-lg text-sm hover:bg-blue-200">Mark In Progress</button>
             <button onClick={() => handleUpdateStatus('RESOLVED')} className="px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 font-bold rounded-lg text-sm hover:bg-green-200">Mark Resolved</button>
           </div>
           
           {/* ASSIGNMENT */}
-          <div className="border-t border-slate-100 dark:border-slate-700 pt-6">
-            <h3 className="font-bold text-slate-800 dark:text-slate-200 mb-4">Assign Worker</h3>
+          <div className="border-t border-slate-100 dark:border-[#2A2A2A] pt-6">
+            <h3 className="font-bold text-slate-800 dark:text-white mb-4">Assign Worker</h3>
             <div className="space-y-3">
               <div>
-                <label className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Worker</label>
-                <select value={selectedWorkerId} onChange={(e) => setSelectedWorkerId(e.target.value)} className="w-full border border-slate-300 dark:border-slate-600 rounded p-2 text-sm">
+                <label className="text-xs font-bold text-slate-600 dark:text-[#A1A1AA] uppercase">Worker</label>
+                <select value={selectedWorkerId} onChange={(e) => setSelectedWorkerId(e.target.value)} className="w-full border border-slate-300 dark:border-[#2A2A2A] rounded p-2 text-sm">
                   <option value="">-- Select Worker --</option>
                   {workers.map(w => <option key={w.id} value={w.id}>{w.name} ({w.department})</option>)}
                 </select>
               </div>
               <div>
-                <label className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Expected Completion</label>
-                <select value={expectedCompletion} onChange={(e) => setExpectedCompletion(e.target.value)} className="w-full border border-slate-300 dark:border-slate-600 rounded p-2 text-sm">
+                <label className="text-xs font-bold text-slate-600 dark:text-[#A1A1AA] uppercase">Expected Completion</label>
+                <select value={expectedCompletion} onChange={(e) => setExpectedCompletion(e.target.value)} className="w-full border border-slate-300 dark:border-[#2A2A2A] rounded p-2 text-sm">
                   <option>1 Day</option><option>2 Days</option><option>3 Days</option><option>7 Days</option>
                 </select>
               </div>
@@ -181,17 +181,17 @@ export const ReportDetails = () => {
 
         {/* Verification */}
         {report.status === 'PENDING_VERIFICATION' && verificationData && (
-          <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+          <div className="bg-white dark:bg-[#111111] p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-[#2A2A2A]">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" /> Verify Completion
             </h2>
-            <img src={verificationData.after_image_url} alt="Fixed" className="w-full h-48 object-cover rounded-lg mb-4 border border-slate-200 dark:border-slate-700" />
-            <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Worker Notes</p>
-            <p className="bg-slate-50 dark:bg-slate-900 p-3 rounded-lg border border-slate-100 dark:border-slate-700 text-sm mb-4">{verificationData.completion_notes || 'No notes provided.'}</p>
+            <img src={verificationData.after_image_url} alt="Fixed" className="w-full h-48 object-cover rounded-lg mb-4 border border-slate-200 dark:border-[#2A2A2A]" />
+            <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase mb-1">Worker Notes</p>
+            <p className="bg-slate-50 dark:bg-black p-3 rounded-lg border border-slate-100 dark:border-[#2A2A2A] text-sm mb-4">{verificationData.completion_notes || 'No notes provided.'}</p>
             
             <textarea 
               placeholder="Admin verification notes..." 
-              className="w-full border border-slate-300 dark:border-slate-600 rounded p-2 text-sm mb-4"
+              className="w-full border border-slate-300 dark:border-[#2A2A2A] rounded p-2 text-sm mb-4"
               value={verificationNotes}
               onChange={(e) => setVerificationNotes(e.target.value)}
             />

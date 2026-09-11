@@ -31,30 +31,30 @@ export const OfficerLogin = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-slate-100 dark:bg-slate-950 flex items-center justify-center p-4 transition-colors">
-      <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-700 transition-colors">
-        <div className="bg-slate-800 dark:bg-slate-900 p-8 text-center border-b-4 border-blue-600 transition-colors">
-          <div className="w-16 h-16 bg-slate-700 dark:bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-colors">
+    <div className="min-h-[calc(100vh-64px)] bg-slate-100 dark:bg-black flex items-center justify-center p-4 transition-colors">
+      <div className="max-w-md w-full bg-white dark:bg-[#111111] rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-[#2A2A2A] transition-colors">
+        <div className="bg-slate-800 dark:bg-black p-6 text-center border-b-4 border-blue-600 transition-colors">
+          <div className="w-16 h-16 bg-slate-700 dark:bg-[#111111] rounded-2xl flex items-center justify-center mx-auto mb-4 transition-colors">
             <Shield className="w-8 h-8 text-white" />
           </div>
           <h2 className="text-2xl font-black text-white">RoadGuard AI</h2>
-          <p className="text-slate-300 dark:text-slate-400 mt-2 text-sm font-bold tracking-wide uppercase">Officer Portal</p>
-          <p className="text-slate-400 dark:text-slate-500 mt-1 text-xs">Monitor, verify and manage road damage reports.</p>
+          <p className="text-slate-300 dark:text-[#A1A1AA] mt-2 text-sm font-bold tracking-wide uppercase">Officer Portal</p>
+          <p className="text-slate-400 dark:text-[#A1A1AA] mt-1 text-xs">Monitor, verify and manage road damage reports.</p>
         </div>
         
-        <div className="p-8">
+        <div className="p-6">
           {error && <div className="bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-3 rounded-lg text-sm font-bold mb-4 border border-red-200 dark:border-red-900/50">{error}</div>}
           
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Admin Email</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-[#A1A1AA] mb-1">Admin Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 w-5 h-5" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#A1A1AA] w-5 h-5" />
                 <input 
                   type="email" 
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-black border border-slate-300 dark:border-[#2A2A2A] text-slate-900 dark:text-white placeholder-slate-400 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
                   placeholder="Enter admin email"
                   required
                 />
@@ -62,21 +62,21 @@ export const OfficerLogin = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Password</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-[#A1A1AA] mb-1">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#A1A1AA] w-5 h-5" />
                 <input 
                   type="password" 
                   value={password}
                   onChange={e => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-black border border-slate-300 dark:border-[#2A2A2A] text-slate-900 dark:text-white placeholder-slate-400 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
                   placeholder="Enter password"
                   required
                 />
               </div>
             </div>
 
-            <button type="button" onClick={useDemo} className="text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:underline w-full text-right transition-colors">
+            <button type="button" onClick={useDemo} className="text-sm font-bold text-slate-500 dark:text-[#A1A1AA] hover:text-slate-700 dark:hover:text-slate-200 hover:underline w-full text-right transition-colors">
               Use Demo Credentials
             </button>
 
@@ -88,10 +88,10 @@ export const OfficerLogin = () => {
             </button>
           </form>
 
-          <div className="mt-8 border-t border-slate-200 dark:border-slate-700 pt-6">
+          <div className="mt-8 border-t border-slate-200 dark:border-[#2A2A2A] pt-6">
             <button 
               onClick={handleDemoLogin}
-              className="w-full flex items-center justify-center gap-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 py-3 rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-colors"
+              className="w-full flex items-center justify-center gap-2 bg-white dark:bg-[#111111] hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-[#A1A1AA] py-3 rounded-xl font-bold border border-slate-200 dark:border-[#2A2A2A] transition-colors"
             >
               1-Click Demo Login <ArrowRight className="w-5 h-5" />
             </button>

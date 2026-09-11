@@ -44,13 +44,13 @@ export const MyReportsPage = () => {
 
   const getStatusColor = (status: string) => {
     switch(status) {
-      case 'REPORTED': return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700';
+      case 'REPORTED': return 'bg-slate-100 dark:bg-[#111111] text-slate-800 dark:text-white border-slate-200 dark:border-[#2A2A2A]';
       case 'VERIFIED': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 border-blue-200 dark:border-blue-800/50';
       case 'ASSIGNED': return 'bg-purple-100 text-purple-800 border-purple-200';
       case 'IN_PROGRESS': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800';
       case 'RESOLVED': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800';
       case 'REJECTED': return 'bg-red-100 dark:bg-red-900/30 text-red-800 border-red-200 dark:border-red-800';
-      default: return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200';
+      default: return 'bg-slate-100 dark:bg-[#111111] text-slate-800 dark:text-white';
     }
   };
 
@@ -61,26 +61,26 @@ export const MyReportsPage = () => {
           <Activity className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           My Submitted Reports
         </h1>
-        <p className="text-slate-500 dark:text-slate-400 mt-2">Track the progress and repair status of your road damage reports.</p>
+        <p className="text-slate-500 dark:text-[#A1A1AA] mt-2">Track the progress and repair status of your road damage reports.</p>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 mb-8 flex flex-col sm:flex-row gap-4">
+      <div className="bg-white dark:bg-[#111111] p-4 rounded-xl shadow-sm border border-slate-200 dark:border-[#2A2A2A] mb-8 flex flex-col sm:flex-row gap-4">
         <div className="flex-1 relative">
-          <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
+          <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#A1A1AA]" />
           <input 
             type="text" 
             placeholder="Search by Report ID or Location..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+            className="w-full pl-10 pr-4 py-2 border border-slate-300 dark:border-[#2A2A2A] rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-5 h-5 text-slate-400 dark:text-slate-500" />
+          <Filter className="w-5 h-5 text-slate-400 dark:text-[#A1A1AA]" />
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 outline-none"
+            className="border border-slate-300 dark:border-[#2A2A2A] rounded-lg px-3 py-2 text-sm focus:ring-blue-500 outline-none"
           >
             <option value="ALL">All Statuses</option>
             <option value="REPORTED">Reported</option>
@@ -98,15 +98,15 @@ export const MyReportsPage = () => {
           <Loader2 className="w-8 h-8 animate-spin text-blue-600 dark:text-blue-400" />
         </div>
       ) : filteredReports.length === 0 ? (
-        <div className="bg-white dark:bg-slate-800 p-10 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 text-center">
+        <div className="bg-white dark:bg-[#111111] p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-[#2A2A2A] text-center">
           <AlertCircle className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-          <h2 className="text-xl font-bold text-slate-700 dark:text-slate-300">No Reports Found</h2>
-          <p className="text-slate-500 dark:text-slate-400 mt-2">No reports match your current filters.</p>
+          <h2 className="text-xl font-bold text-slate-700 dark:text-[#A1A1AA]">No Reports Found</h2>
+          <p className="text-slate-500 dark:text-[#A1A1AA] mt-2">No reports match your current filters.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {filteredReports.map(report => (
-            <div key={report.id} className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <div key={report.id} className="bg-white dark:bg-[#111111] rounded-2xl shadow-sm border border-slate-200 dark:border-[#2A2A2A] overflow-hidden">
               <div className="p-5">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                   <div>
@@ -116,27 +116,27 @@ export const MyReportsPage = () => {
                         {report.status}
                       </span>
                     </div>
-                    <p className="text-slate-600 dark:text-slate-400 flex items-center gap-1.5 text-sm font-medium mb-1">
-                      <MapPin className="w-4 h-4 text-slate-400 dark:text-slate-500" /> {report.address || 'GPS Location'}
+                    <p className="text-slate-600 dark:text-[#A1A1AA] flex items-center gap-1.5 text-sm font-medium mb-1">
+                      <MapPin className="w-4 h-4 text-slate-400 dark:text-[#A1A1AA]" /> {report.address || 'GPS Location'}
                     </p>
-                    <p className="text-slate-400 dark:text-slate-500 flex items-center gap-1.5 text-sm">
+                    <p className="text-slate-400 dark:text-[#A1A1AA] flex items-center gap-1.5 text-sm">
                       <Clock className="w-4 h-4" /> {new Date(report.created_at).toLocaleString()}
                     </p>
                   </div>
 
                   <div className="flex gap-4 items-center">
-                    <div className="text-center bg-slate-50 dark:bg-slate-900 px-4 py-2 rounded-xl border border-slate-100 dark:border-slate-700">
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold mb-1">AI Severity</p>
+                    <div className="text-center bg-slate-50 dark:bg-black px-4 py-2 rounded-xl border border-slate-100 dark:border-[#2A2A2A]">
+                      <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA] uppercase font-bold mb-1">AI Severity</p>
                       <span className={`font-bold ${report.severity === 'CRITICAL' ? 'text-red-600 dark:text-red-400' : 'text-slate-900 dark:text-white'}`}>{report.severity}</span>
                     </div>
-                    <div className="text-center bg-slate-50 dark:bg-slate-900 px-4 py-2 rounded-xl border border-slate-100 dark:border-slate-700">
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold mb-1">Risk Score</p>
+                    <div className="text-center bg-slate-50 dark:bg-black px-4 py-2 rounded-xl border border-slate-100 dark:border-[#2A2A2A]">
+                      <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA] uppercase font-bold mb-1">Risk Score</p>
                       <RiskScoreBadge score={report.risk_score} level={report.priority as any} size="sm" />
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-5 pt-5 border-t border-slate-100 dark:border-slate-700">
+                <div className="mt-5 pt-5 border-t border-slate-100 dark:border-[#2A2A2A]">
                   <button 
                     onClick={() => navigate(`/my-reports/${report.id}`)}
                     className="w-full flex items-center justify-between text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-50 dark:bg-blue-900/20 px-4 py-2.5 rounded-xl transition-colors"

@@ -24,7 +24,7 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <BrowserRouter>
-          <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 transition-colors duration-200">
+          <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-black transition-colors duration-200">
             <Navigation />
             <main className="flex-1">
               <Routes>

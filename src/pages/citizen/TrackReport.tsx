@@ -50,19 +50,19 @@ export const TrackReport = () => {
     <div className="max-w-3xl mx-auto px-4 py-12 min-h-screen">
       <div className="text-center mb-10">
         <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Track Report</h1>
-        <p className="text-slate-600 dark:text-slate-400">Enter your Report ID to track its progress in real-time.</p>
+        <p className="text-slate-600 dark:text-[#A1A1AA]">Enter your Report ID to track its progress in real-time.</p>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 mb-8">
+      <div className="bg-white dark:bg-[#111111] p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-[#2A2A2A] mb-8">
         <form onSubmit={handleTrack} className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 w-5 h-5" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#A1A1AA] w-5 h-5" />
             <input
               type="text"
               placeholder="e.g. RG-2026-00001"
               value={reportId}
               onChange={(e) => setReportId(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none font-mono text-lg transition-shadow"
+              className="w-full pl-12 pr-4 py-4 border border-slate-300 dark:border-[#2A2A2A] rounded-xl focus:ring-2 focus:ring-blue-500 outline-none font-mono text-lg transition-shadow"
               required
             />
           </div>
@@ -84,18 +84,18 @@ export const TrackReport = () => {
       )}
 
       {report && (
-        <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 animate-in fade-in slide-in-from-bottom-4">
-          <div className="flex flex-wrap justify-between items-start gap-4 mb-8 pb-6 border-b border-slate-100 dark:border-slate-700">
+        <div className="bg-white dark:bg-[#111111] p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-[#2A2A2A] animate-in fade-in slide-in-from-bottom-4">
+          <div className="flex flex-wrap justify-between items-start gap-4 mb-8 pb-6 border-b border-slate-100 dark:border-[#2A2A2A]">
             <div>
-              <p className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Report Details</p>
+              <p className="text-sm font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-wider mb-1">Report Details</p>
               <h2 className="text-2xl font-mono font-black text-slate-900 dark:text-white">{report.id}</h2>
-              <p className="text-slate-600 dark:text-slate-400 mt-2">{report.address}</p>
+              <p className="text-slate-600 dark:text-[#A1A1AA] mt-2">{report.address}</p>
             </div>
             <div className="text-right">
               <span className="inline-block px-4 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 font-bold rounded-full text-sm mb-2 border border-blue-100 dark:border-blue-800">
                 {report.status}
               </span>
-              <p className="text-sm text-slate-500 dark:text-slate-400">Priority: <strong className="text-slate-900 dark:text-white">{report.priority}</strong></p>
+              <p className="text-sm text-slate-500 dark:text-[#A1A1AA]">Priority: <strong className="text-slate-900 dark:text-white">{report.priority}</strong></p>
             </div>
           </div>
 
@@ -118,16 +118,16 @@ export const TrackReport = () => {
                 return (
                   <div key={step.status} className={`flex items-start gap-4 sm:gap-6 ${isCompleted ? 'opacity-100' : 'opacity-40'}`}>
                     <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 border-4 border-white shadow-sm transition-colors
-                      ${isActive ? 'bg-blue-600 text-white' : isCompleted ? 'bg-green-50 dark:bg-green-900/200 text-white' : 'bg-gray-200 text-slate-400 dark:text-slate-500'}`}
+                      ${isActive ? 'bg-blue-600 text-white' : isCompleted ? 'bg-green-50 dark:bg-green-900/200 text-white' : 'bg-gray-200 text-slate-400 dark:text-[#A1A1AA]'}`}
                     >
-                      {isActive ? <Clock className="w-4 h-4 sm:w-6 sm:h-6" /> : isCompleted ? <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6" /> : <div className="w-3 h-3 rounded-full bg-white dark:bg-slate-800"></div>}
+                      {isActive ? <Clock className="w-4 h-4 sm:w-6 sm:h-6" /> : isCompleted ? <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6" /> : <div className="w-3 h-3 rounded-full bg-white dark:bg-[#111111]"></div>}
                     </div>
                     <div className="pt-1 sm:pt-3">
-                      <h3 className={`font-bold text-lg ${isActive ? 'text-blue-600 dark:text-blue-400' : isCompleted ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`}>
+                      <h3 className={`font-bold text-lg ${isActive ? 'text-blue-600 dark:text-blue-400' : isCompleted ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-[#A1A1AA]'}`}>
                         {step.label}
                       </h3>
                       {stepHist && (
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                        <p className="text-sm text-slate-500 dark:text-[#A1A1AA] mt-1">
                           {new Date(stepHist.updated_at).toLocaleString()}
                         </p>
                       )}

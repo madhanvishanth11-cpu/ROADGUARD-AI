@@ -148,20 +148,20 @@ export const Dashboard = () => {
       case 'HIGH': return 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300 border-orange-200 dark:border-orange-800';
       case 'MEDIUM': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800';
       case 'LOW': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800';
-      default: return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700';
+      default: return 'bg-slate-100 dark:bg-[#111111] text-slate-800 dark:text-white border-slate-200 dark:border-[#2A2A2A]';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch(status) {
-      case 'SUBMITTED': return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200';
+      case 'SUBMITTED': return 'bg-slate-100 dark:bg-[#111111] text-slate-800 dark:text-white';
       case 'UNDER_REVIEW': return 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-300';
       case 'VERIFIED': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800';
       case 'ASSIGNED': return 'bg-purple-100 text-purple-800';
       case 'IN_PROGRESS': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300';
       case 'RESOLVED': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300';
       case 'REJECTED': return 'bg-red-100 dark:bg-red-900/30 text-red-800';
-      default: return 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200';
+      default: return 'bg-slate-100 dark:bg-[#111111] text-slate-800 dark:text-white';
     }
   };
 
@@ -169,49 +169,49 @@ export const Dashboard = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="mb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white">RoadGuard AI — Dashboard</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1">Monitor, verify and prioritize reported road damage.</p>
+          <p className="text-slate-500 dark:text-[#A1A1AA] mt-1">Monitor, verify and prioritize reported road damage.</p>
         </div>
         <button 
           onClick={fetchReports} 
           disabled={isRefreshing}
-          className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:bg-slate-900 transition-colors self-start md:self-end disabled:opacity-50"
+          className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#111111] border border-slate-300 dark:border-[#2A2A2A] text-slate-700 dark:text-[#A1A1AA] rounded-lg hover:bg-slate-50 dark:bg-black transition-colors self-start md:self-end disabled:opacity-50"
         >
           <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} /> Refresh
         </button>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-        <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 col-span-2 md:col-span-1">
-          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Active Reports</p>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
+        <div className="bg-white dark:bg-[#111111] p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#2A2A2A] col-span-2 md:col-span-1">
+          <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-wide">Active Reports</p>
           <p className="text-3xl font-black text-slate-900 dark:text-white mt-1">{stats.active}</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-yellow-100 bg-yellow-50 dark:bg-yellow-900/20/30">
+        <div className="bg-white dark:bg-[#111111] p-4 rounded-xl shadow-sm border border-yellow-100 bg-yellow-50 dark:bg-yellow-900/20/30">
           <p className="text-xs font-bold text-yellow-800 dark:text-yellow-300 uppercase tracking-wide">In Progress</p>
           <p className="text-3xl font-black text-yellow-600 mt-1">{stats.inProgress}</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-green-100 bg-green-50 dark:bg-green-900/20/30">
+        <div className="bg-white dark:bg-[#111111] p-4 rounded-xl shadow-sm border border-green-100 bg-green-50 dark:bg-green-900/20/30">
           <p className="text-xs font-bold text-green-800 dark:text-green-300 uppercase tracking-wide">Resolved</p>
           <p className="text-3xl font-black text-green-600 dark:text-green-400 mt-1">{stats.resolved}</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-red-100 bg-red-50 dark:bg-red-900/20/30">
+        <div className="bg-white dark:bg-[#111111] p-4 rounded-xl shadow-sm border border-red-100 bg-red-50 dark:bg-red-900/20/30">
           <p className="text-xs font-bold text-red-800 uppercase tracking-wide">Rejected</p>
           <p className="text-3xl font-black text-red-600 dark:text-red-400 mt-1">{stats.rejected}</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-blue-100 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20/30 col-span-2 md:col-span-1">
+        <div className="bg-white dark:bg-[#111111] p-4 rounded-xl shadow-sm border border-blue-100 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20/30 col-span-2 md:col-span-1">
           <p className="text-xs font-bold text-blue-800 uppercase tracking-wide">Avg Resolution Time</p>
           <p className="text-xl md:text-2xl font-black text-blue-600 dark:text-blue-400 mt-1.5">{avgResolutionTime}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         
         {/* Interactive Map */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden flex flex-col lg:col-span-1 lg:order-2 h-[400px] lg:h-auto">
-          <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
+        <div className="bg-white dark:bg-[#111111] rounded-2xl shadow-sm border border-slate-100 dark:border-[#2A2A2A] overflow-hidden flex flex-col lg:col-span-1 lg:order-2 h-[400px] lg:h-auto">
+          <div className="px-6 py-4 border-b border-slate-100 dark:border-[#2A2A2A] flex justify-between items-center bg-slate-50 dark:bg-black">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">Incident Map</h3>
           </div>
           <div className="flex-1 relative z-0">
@@ -235,7 +235,7 @@ export const Dashboard = () => {
                       <span className={`px-2 py-0.5 text-xs font-bold rounded-full block mb-2 w-max ${getPriorityColor(report.priority)}`}>
                         {report.priority} ({report.risk_score})
                       </span>
-                      <p className="text-slate-600 dark:text-slate-400 mb-2 truncate max-w-[150px]">{report.address}</p>
+                      <p className="text-slate-600 dark:text-[#A1A1AA] mb-2 truncate max-w-[150px]">{report.address}</p>
                       <Link to={`/authority/report/${report.id}`} className="text-blue-600 dark:text-blue-400 font-medium hover:underline text-xs">
                         View Report →
                       </Link>
@@ -243,8 +243,8 @@ export const Dashboard = () => {
                   </Popup>
                 </Marker>
               ))}
-              <div className="absolute bottom-4 left-4 z-[400] bg-white dark:bg-slate-800/95 backdrop-blur p-3 rounded-lg shadow-md border border-slate-200 dark:border-slate-700 text-xs flex flex-col gap-2 pointer-events-none">
-                <span className="font-bold text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-700 pb-1">Priority Legend</span>
+              <div className="absolute bottom-4 left-4 z-[400] bg-white dark:bg-[#111111] backdrop-blur p-3 rounded-lg shadow-md border border-slate-200 dark:border-[#2A2A2A] text-xs flex flex-col gap-2 pointer-events-none">
+                <span className="font-bold text-slate-700 dark:text-[#A1A1AA] border-b border-slate-100 dark:border-[#2A2A2A] pb-1">Priority Legend</span>
                 <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-red-50 dark:bg-red-900/200 shadow-sm border border-red-600"></span> Critical</div>
                 <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-orange-50 dark:bg-orange-900/200 shadow-sm border border-orange-600"></span> High</div>
                 <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-yellow-50 dark:bg-yellow-900/200 shadow-sm border border-yellow-600"></span> Medium</div>
@@ -256,24 +256,24 @@ export const Dashboard = () => {
 
         {/* Priority Reports List */}
         <div className="lg:col-span-2 lg:order-1 flex flex-col gap-4">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 p-4">
+          <div className="bg-white dark:bg-[#111111] rounded-2xl shadow-sm border border-slate-100 dark:border-[#2A2A2A] p-4">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 md:mb-0">Repair Priority Queue</h2>
             
             {/* Filters & Search */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row gap-3 mb-3">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-[#A1A1AA]" />
                 <input 
                   type="text" 
                   placeholder="Search by ID or Location..." 
-                  className="w-full pl-9 pr-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-9 pr-4 py-2 border border-slate-300 dark:border-[#2A2A2A] rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
               <div className="flex gap-2">
                 <select 
-                  className="border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800"
+                  className="border border-slate-300 dark:border-[#2A2A2A] rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 bg-white dark:bg-[#111111]"
                   value={priorityFilter}
                   onChange={(e) => setPriorityFilter(e.target.value)}
                 >
@@ -284,7 +284,7 @@ export const Dashboard = () => {
                   <option value="LOW">Low</option>
                 </select>
                 <select 
-                  className="border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800"
+                  className="border border-slate-300 dark:border-[#2A2A2A] rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 bg-white dark:bg-[#111111]"
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
                 >
@@ -302,24 +302,24 @@ export const Dashboard = () => {
             </div>
 
             {/* Desktop Table View */}
-            <div className="hidden md:block overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+            <div className="hidden md:block overflow-x-auto rounded-lg border border-slate-200 dark:border-[#2A2A2A]">
               <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-                <thead className="bg-slate-50 dark:bg-slate-900">
+                <thead className="bg-slate-50 dark:bg-black">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Report ID</th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Location</th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Priority</th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Risk</th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Status</th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Date</th>
-                    <th className="px-4 py-3 text-right text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Action</th>
+                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Report ID</th>
+                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Location</th>
+                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Priority</th>
+                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Risk</th>
+                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Status</th>
+                    <th className="px-4 py-3 text-left text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Date</th>
+                    <th className="px-4 py-3 text-right text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Action</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
+                <tbody className="bg-white dark:bg-[#111111] divide-y divide-slate-200 dark:divide-slate-700">
                   {filteredReports.map((report) => (
                     <tr key={report.id} className="hover:bg-blue-50 dark:bg-blue-900/20/50 transition-colors">
                       <td className="px-4 py-3 whitespace-nowrap font-mono text-sm font-medium text-slate-900 dark:text-white">{report.id}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400 truncate max-w-[150px]">{report.address || `${report.latitude.toFixed(2)}, ${report.longitude.toFixed(2)}`}</td>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-600 dark:text-[#A1A1AA] truncate max-w-[150px]">{report.address || `${report.latitude.toFixed(2)}, ${report.longitude.toFixed(2)}`}</td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         <span className={`px-2 inline-flex text-xs leading-5 font-bold rounded-full ${getPriorityColor(report.priority)}`}>
                           {report.priority}
@@ -333,7 +333,7 @@ export const Dashboard = () => {
                           {report.status}
                         </span>
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-500 dark:text-[#A1A1AA]">
                         {new Date(report.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-right text-sm font-medium">
@@ -345,7 +345,7 @@ export const Dashboard = () => {
                   ))}
                   {filteredReports.length === 0 && (
                     <tr>
-                      <td colSpan={7} className="px-4 py-8 text-center text-slate-500 dark:text-slate-400">No reports found matching your criteria.</td>
+                      <td colSpan={7} className="px-4 py-8 text-center text-slate-500 dark:text-[#A1A1AA]">No reports found matching your criteria.</td>
                     </tr>
                   )}
                 </tbody>
@@ -355,22 +355,22 @@ export const Dashboard = () => {
             {/* Mobile Cards View */}
             <div className="md:hidden space-y-4">
               {filteredReports.map((report) => (
-                <div key={report.id} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div key={report.id} className="bg-white dark:bg-[#111111] border border-slate-200 dark:border-[#2A2A2A] rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-2">
                     <span className="font-mono font-bold text-slate-900 dark:text-white">{report.id}</span>
                     <span className={`px-2 py-1 text-[10px] uppercase font-bold rounded-full ${getPriorityColor(report.priority)}`}>
                       {report.priority}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 truncate">{report.address || `${report.latitude.toFixed(4)}, ${report.longitude.toFixed(4)}`}</p>
+                  <p className="text-sm text-slate-600 dark:text-[#A1A1AA] mb-3 truncate">{report.address || `${report.latitude.toFixed(4)}, ${report.longitude.toFixed(4)}`}</p>
                   
                   <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="bg-slate-50 dark:bg-slate-900 p-2 rounded-lg border border-slate-100 dark:border-slate-700 flex flex-col items-start justify-center">
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold mb-1">Risk Score</p>
+                    <div className="bg-slate-50 dark:bg-black p-2 rounded-lg border border-slate-100 dark:border-[#2A2A2A] flex flex-col items-start justify-center">
+                      <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA] uppercase font-bold mb-1">Risk Score</p>
                       <RiskScoreBadge score={report.risk_score} level={report.priority as any} size="sm" />
                     </div>
-                    <div className="bg-slate-50 dark:bg-slate-900 p-2 rounded-lg border border-slate-100 dark:border-slate-700 flex flex-col items-start justify-center">
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Status</p>
+                    <div className="bg-slate-50 dark:bg-black p-2 rounded-lg border border-slate-100 dark:border-[#2A2A2A] flex flex-col items-start justify-center">
+                      <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA] uppercase font-bold">Status</p>
                       <span className={`mt-1 inline-flex text-xs font-bold rounded-full ${getStatusColor(report.status).replace('bg-', 'text-').replace('text-', '')}`}>
                         {report.status}
                       </span>
@@ -386,7 +386,7 @@ export const Dashboard = () => {
                 </div>
               ))}
               {filteredReports.length === 0 && (
-                <div className="text-center py-8 text-slate-500 dark:text-slate-400 border border-dashed border-slate-300 dark:border-slate-600 rounded-xl">
+                <div className="text-center py-8 text-slate-500 dark:text-[#A1A1AA] border border-dashed border-slate-300 dark:border-[#2A2A2A] rounded-xl">
                   No reports found matching your criteria.
                 </div>
               )}
