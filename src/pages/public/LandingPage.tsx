@@ -293,24 +293,6 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      {/* 7. COMPLETE WORKFLOW */}
-      <section className="py-32 px-4 bg-gradient-to-b from-blue-50 to-white dark:from-slate-900 dark:to-slate-800 text-center transition-colors">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-sm font-black text-blue-600 dark:text-blue-500 tracking-widest uppercase mb-4">From Problem to Solution</h2>
-          <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-16 transition-colors">THE COMPLETE WORKFLOW</h3>
-          
-          <div className="flex flex-col items-center gap-4">
-            {['ROAD DAMAGE', 'REPORT', 'AI ANALYSIS', 'PRIORITY', 'OFFICER VERIFICATION', 'WORKER ASSIGNMENT', 'REPAIR', 'VERIFICATION', 'RESOLVED'].map((step, i, arr) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className={`px-8 py-4 rounded-xl font-black tracking-widest text-lg shadow-sm border transition-colors ${i === 0 || i === arr.length - 1 ? 'bg-slate-900 dark:bg-blue-600 text-white border-slate-800 dark:border-blue-700' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>
-                  {step}
-                </div>
-                {i !== arr.length - 1 && <ArrowDown className="w-6 h-6 text-slate-300 dark:text-slate-600 my-4 transition-colors" />}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 8 & 9. SYSTEM SHOWCASES */}
       <section className="py-24 px-4 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800 transition-colors">
