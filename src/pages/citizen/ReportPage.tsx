@@ -262,42 +262,21 @@ export const ReportPage = () => {
             <CheckCircle className="w-10 h-10" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Report Submitted Successfully</h2>
-          <p className="text-gray-500 mb-6">Thank you for keeping our roads safe. The authority has been notified.</p>
+          <p className="text-gray-500 mb-6">Your road damage report has been submitted successfully.</p>
           
           <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 text-left mb-8 space-y-3">
             <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-              <span className="text-gray-500">Report ID</span>
-              <span className="font-mono font-bold text-blue-600">{submittedReportId}</span>
-            </div>
-            <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-              <span className="text-gray-500">Location</span>
-              <span className="font-semibold text-gray-900 text-right truncate max-w-[180px]" title={address}>{address || 'GPS'}</span>
-            </div>
-            <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-              <span className="text-gray-500">Risk Score</span>
-              <span className="font-semibold text-gray-900">{analysisResult?.riskScore}/100</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-500">Status</span>
-              <span className="px-2 py-1 bg-gray-200 text-gray-800 text-xs font-bold rounded-full">REPORTED</span>
+              <span className="text-gray-500 font-bold">Report ID</span>
+              <span className="font-mono font-black text-blue-600">{submittedReportId}</span>
             </div>
           </div>
           
           <div className="flex flex-col gap-3">
-            <button 
-              onClick={() => {
-                removeImage();
-                setLocation(null);
-                setSubmittedReportId(null);
-                setDuplicateWarning(false);
-                setAddress('');
-              }}
-              className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-            >
-              Report Another Issue
-            </button>
-            <Link to="/" className="w-full py-3 bg-white text-gray-700 border border-gray-200 rounded-lg font-medium hover:bg-gray-50 transition-colors block text-center">
-              Back to Home
+            <Link to="/track" className="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors block text-center">
+              Track Report
+            </Link>
+            <Link to="/dashboard" className="w-full py-3 bg-white text-gray-700 border border-gray-200 rounded-lg font-bold hover:bg-gray-50 transition-colors block text-center">
+              Back to Dashboard
             </Link>
           </div>
         </div>
