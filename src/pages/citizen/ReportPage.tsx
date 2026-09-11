@@ -246,8 +246,11 @@ export const ReportPage = () => {
       
       setSubmittedReportId(report.id);
     } catch (err: any) {
-      setSubmitError(err.message || 'Failed to submit the report. Please try again.');
-      console.error(err);
+      let errorMessage = err.message || 'Failed to submit the report. Please try again.';
+      if (err.details) errorMessage += ` Details: ${err.details}`;
+      if (err.hint) errorMessage += ` Hint: ${err.hint}`;
+      setSubmitError(errorMessage);
+      console.error("Detailed Submit Error:", err);
     } finally {
       setIsSubmitting(false);
     }
