@@ -236,7 +236,7 @@ export const Dashboard = () => {
                         {report.priority} ({report.risk_score})
                       </span>
                       <p className="text-slate-600 dark:text-[#A1A1AA] mb-2 truncate max-w-[150px]">{report.address}</p>
-                      <Link to={`/authority/report/${report.id}`} className="text-blue-600 dark:text-blue-400 font-medium hover:underline text-xs">
+                      <Link to={`/report/${report.id}`} className="text-blue-600 dark:text-blue-400 font-medium hover:underline text-xs">
                         View Report →
                       </Link>
                     </div>
@@ -337,7 +337,7 @@ export const Dashboard = () => {
                         {new Date(report.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-right text-sm font-medium">
-                        <button onClick={() => navigate(`/authority/report/${report.id}`)} className="text-blue-600 dark:text-blue-400 hover:text-blue-900 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-md transition-colors inline-flex items-center">
+                        <button onClick={() => navigate(`/report/${report.id}`)} className="text-blue-600 dark:text-blue-400 hover:text-blue-900 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-md transition-colors inline-flex items-center">
                           View
                         </button>
                       </td>
@@ -378,7 +378,7 @@ export const Dashboard = () => {
                   </div>
                   
                   <button 
-                    onClick={() => navigate(`/authority/report/${report.id}`)} 
+                    onClick={() => navigate(`/report/${report.id}`)} 
                     className="w-full py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 font-semibold rounded-lg hover:bg-blue-100 dark:bg-blue-900/30 transition-colors flex justify-center items-center"
                   >
                     View Report <ChevronRight className="w-4 h-4 ml-1" />

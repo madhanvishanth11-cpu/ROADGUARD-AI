@@ -12,11 +12,10 @@ import { OfficerLogin } from './pages/auth/OfficerLogin';
 import { ReportPage } from './pages/citizen/ReportPage';
 import { TrackReport } from './pages/citizen/TrackReport';
 import { MyReportsPage } from './pages/citizen/MyReportsPage';
-import { CitizenReportDetail } from './pages/citizen/CitizenReportDetail';
+import { SharedReportDetail } from './pages/shared/SharedReportDetail';
 
 import { Dashboard } from './pages/authority/Dashboard';
 import { Analytics } from './pages/authority/Analytics';
-import { ReportDetails } from './pages/authority/ReportDetails';
 import { WorkerDashboard } from './pages/worker/WorkerDashboard';
 
 function App() {
@@ -39,13 +38,12 @@ function App() {
                 {/* PROTECTED PUBLIC ROUTES */}
                 <Route element={<AuthGuard />}>
                   <Route path="/dashboard" element={<MyReportsPage />} />
-                  <Route path="/dashboard/:reportId" element={<CitizenReportDetail />} />
+                  <Route path="/report/:id" element={<SharedReportDetail />} />
                 </Route>
 
                 {/* PROTECTED ADMIN ROUTES */}
                 <Route element={<RoleGuard allowedRoles={['ADMIN']} />}>
                   <Route path="/admin" element={<Dashboard />} />
-                  <Route path="/admin/report/:id" element={<ReportDetails />} />
                   <Route path="/analytics" element={<Analytics />} />
                 </Route>
               </Routes>
