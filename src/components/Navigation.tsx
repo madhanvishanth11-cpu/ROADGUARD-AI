@@ -1,9 +1,21 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Shield, Menu, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Shield, Menu, X, LogOut, User as UserIcon } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    if (user?.role === 'ADMIN') {
+      navigate('/officer-login');
+    } else {
+      navigate('/');
+    }
+  };
 
   return (
     <nav className="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
@@ -22,15 +34,52 @@ export const Navigation = () => {
           </div>
           
           <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4 lg:space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Dashboard</Link>
-            <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
-            <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
             
-            <div className="h-4 w-px bg-gray-300 mx-2"></div>
-            
-            {/* Internal tools links for easy testing */}
-            <Link to="/officer" className="text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded text-xs font-bold transition-colors">Officer Portal</Link>
-            <Link to="/worker" className="text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded text-xs font-bold transition-colors">Worker App</Link>
+            {/* PUBLIC NAVIGATION */}
+            {!user && (
+              <>
+                <Link to="/" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Home</Link>
+                <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
+                <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
+                <div className="h-4 w-px bg-gray-300 mx-2"></div>
+                <Link to="/login" className="text-blue-600 font-bold hover:text-blue-700 px-2 py-2 text-sm transition-colors">Public Sign In</Link>
+                <Link to="/officer-login" className="text-slate-600 font-bold hover:text-slate-800 px-2 py-2 text-sm transition-colors">Officer Portal</Link>
+              </>
+            )}
+
+            {/* LOGGED IN - PUBLIC */}
+            {user?.role === 'PUBLIC' && (
+              <>
+                <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Dashboard</Link>
+                <Link to="/report" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Report Damage</Link>
+                <Link to="/track" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Track Report</Link>
+                <div className="flex items-center gap-4 ml-4 pl-4 border-l border-gray-200">
+                  <div className="flex items-center gap-2 text-sm font-bold text-gray-700">
+                    <UserIcon className="w-4 h-4" /> {user.name}
+                  </div>
+                  <button onClick={handleLogout} className="text-red-600 hover:text-red-700 flex items-center gap-1 px-2 py-2 text-sm font-bold transition-colors">
+                    <LogOut className="w-4 h-4" /> Logout
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* LOGGED IN - ADMIN */}
+            {user?.role === 'ADMIN' && (
+              <>
+                <Link to="/admin" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Admin Dashboard</Link>
+                <Link to="/analytics" className="text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors">Analytics</Link>
+                <div className="flex items-center gap-4 ml-4 pl-4 border-l border-gray-200">
+                  <div className="flex items-center gap-2 text-sm font-bold text-slate-800 bg-slate-100 px-3 py-1 rounded-full">
+                    <Shield className="w-3 h-3 text-blue-600" /> {user.name}
+                  </div>
+                  <button onClick={handleLogout} className="text-red-600 hover:text-red-700 flex items-center gap-1 px-2 py-2 text-sm font-bold transition-colors">
+                    <LogOut className="w-4 h-4" /> Logout
+                  </button>
+                </div>
+              </>
+            )}
+
           </div>
 
           <div className="flex items-center sm:hidden">
@@ -47,13 +96,38 @@ export const Navigation = () => {
       {isMobileMenuOpen && (
         <div className="sm:hidden border-t border-gray-100">
           <div className="pt-2 pb-3 space-y-1 px-4 bg-white shadow-xl">
-            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Public Dashboard</Link>
-            <Link to="/report" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Report Damage</Link>
-            <Link to="/track" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Track Report</Link>
-            <div className="border-t border-gray-100 my-2 pt-2">
-              <Link to="/officer" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-slate-700 hover:bg-slate-50 rounded-md">Officer Portal</Link>
-              <Link to="/worker" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-blue-700 hover:bg-blue-50 rounded-md">Worker App</Link>
-            </div>
+            
+            {!user && (
+              <>
+                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Home</Link>
+                <Link to="/report" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Report Damage</Link>
+                <Link to="/track" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Track Report</Link>
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-blue-600 hover:bg-blue-50 rounded-md">Public Sign In</Link>
+                <Link to="/officer-login" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-bold text-slate-700 hover:bg-slate-50 rounded-md">Officer Portal</Link>
+              </>
+            )}
+
+            {user?.role === 'PUBLIC' && (
+              <>
+                <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Dashboard</Link>
+                <Link to="/report" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Report Damage</Link>
+                <Link to="/track" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Track Report</Link>
+                <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} className="w-full text-left block px-3 py-2 text-base font-bold text-red-600 hover:bg-red-50 rounded-md mt-2">
+                  Logout
+                </button>
+              </>
+            )}
+
+            {user?.role === 'ADMIN' && (
+              <>
+                <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Admin Dashboard</Link>
+                <Link to="/analytics" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Analytics</Link>
+                <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} className="w-full text-left block px-3 py-2 text-base font-bold text-red-600 hover:bg-red-50 rounded-md mt-2">
+                  Logout
+                </button>
+              </>
+            )}
+
           </div>
         </div>
       )}

@@ -154,7 +154,8 @@ export const Dashboard = () => {
 
   const getStatusColor = (status: string) => {
     switch(status) {
-      case 'REPORTED': return 'bg-gray-100 text-gray-800';
+      case 'SUBMITTED': return 'bg-gray-100 text-gray-800';
+      case 'UNDER_REVIEW': return 'bg-yellow-50 text-yellow-800';
       case 'VERIFIED': return 'bg-blue-100 text-blue-800';
       case 'ASSIGNED': return 'bg-purple-100 text-purple-800';
       case 'IN_PROGRESS': return 'bg-yellow-100 text-yellow-800';
@@ -288,10 +289,12 @@ export const Dashboard = () => {
                   onChange={(e) => setStatusFilter(e.target.value)}
                 >
                   <option value="ALL">All Statuses</option>
-                  <option value="REPORTED">Reported</option>
-                  <option value="VERIFIED">Verified</option>
+                  <option value="SUBMITTED">Submitted</option>
+                  <option value="UNDER_REVIEW">Under Review</option>
                   <option value="ASSIGNED">Assigned</option>
                   <option value="IN_PROGRESS">In Progress</option>
+                  <option value="PENDING_VERIFICATION">Pending Verification</option>
+                  <option value="REWORK_REQUIRED">Rework Required</option>
                   <option value="RESOLVED">Resolved</option>
                   <option value="REJECTED">Rejected</option>
                 </select>
