@@ -38,7 +38,7 @@ export const Navigation = () => {
               <img 
                 src="/branding/roadguard-logo.png" 
                 alt="RoadGuard AI" 
-                className="h-8 sm:h-11 w-auto object-contain dark:bg-white dark:rounded-md dark:p-0.5 transition-colors" 
+                className="h-[42px] sm:h-[52px] w-auto object-contain dark:bg-white dark:rounded-md dark:p-0.5 transition-colors" 
               />
               <span className="hidden sm:inline-flex ml-2 px-2 py-0.5 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 text-[10px] font-black rounded uppercase tracking-widest transition-colors">
                 Public Beta
