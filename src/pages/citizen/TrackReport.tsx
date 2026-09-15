@@ -266,25 +266,19 @@ const TrackReportContent = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             <div className="bg-slate-50 dark:bg-black p-3 rounded-lg border border-slate-100 dark:border-[#2A2A2A]">
               <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Damage Type</p>
-              <p className="font-medium text-slate-900 dark:text-white mt-1">{report.pothole_detected ? "Pothole" : "Surface Damage"}</p>
+              <p className="font-medium text-slate-900 dark:text-white mt-1">{report.damageType || (report.pothole_detected ? "Pothole" : "Surface Damage")}</p>
             </div>
             <div className="bg-slate-50 dark:bg-black p-3 rounded-lg border border-slate-100 dark:border-[#2A2A2A]">
-              <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Submitted Date</p>
-              <p className="font-medium text-slate-900 dark:text-white mt-1">{report.created_at ? new Date(report.created_at).toLocaleDateString() : "Date unavailable"}</p>
+              <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Severity</p>
+              <p className="font-medium text-slate-900 dark:text-white mt-1">{report.severity || "Unknown"}</p>
             </div>
             <div className="bg-slate-50 dark:bg-black p-3 rounded-lg border border-slate-100 dark:border-[#2A2A2A]">
-              <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Risk Score</p>
-              <p className="font-medium text-slate-900 dark:text-white mt-1">{report.risk_score ?? "N/A"}</p>
+              <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">AI Estimated Size</p>
+              <p className="font-medium text-slate-900 dark:text-white mt-1">{report.estimated_size || "N/A"}</p>
             </div>
             <div className="bg-slate-50 dark:bg-black p-3 rounded-lg border border-slate-100 dark:border-[#2A2A2A]">
-              <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Image</p>
-              <p className="font-medium text-slate-900 dark:text-white mt-1">
-                {report.image_url ? (
-                  <a href={report.image_url} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">View Image</a>
-                ) : (
-                  <span className="text-slate-500">None uploaded</span>
-                )}
-              </p>
+              <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase">Risk Level</p>
+              <p className="font-medium text-slate-900 dark:text-white mt-1">{report.risk_level || "N/A"}</p>
             </div>
           </div>
 

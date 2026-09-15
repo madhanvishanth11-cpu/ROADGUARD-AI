@@ -12,9 +12,15 @@ export interface AIAnalysisResult {
   confidence: number;
   estimatedSeverity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
   estimatedSize: string;
+  estimatedLength?: number;
+  estimatedWidth?: number;
+  estimatedArea?: number;
+  estimatedDepth?: string;
   riskScore: number;
   detectedDamageType: string;
   explanation: string;
+  aiAssessment?: string;
+  recommendedAction?: string;
   boundingBoxes?: BoundingBox[];
 }
 

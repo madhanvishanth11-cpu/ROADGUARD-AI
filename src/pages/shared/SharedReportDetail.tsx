@@ -311,7 +311,7 @@ export const SharedReportDetail = () => {
         {/* Right Column (Sidebar details) */}
         <div className="space-y-6">
           
-          {/* AI Analysis (Visible to admin only as requested, but user said show to admin, public doesn't need admin controls. I'll show it but style it nicely) */}
+          {/* AI Analysis */}
           {(isAdmin || report.confidence > 0) && (
             <div className="bg-white dark:bg-[#111111] rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-[#2A2A2A]">
               <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
@@ -328,10 +328,10 @@ export const SharedReportDetail = () => {
                 </div>
               </div>
 
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3 text-sm mb-4">
                 <div className="flex justify-between border-b border-slate-100 dark:border-[#2A2A2A] pb-2">
                   <span className="text-slate-500 dark:text-[#A1A1AA]">Damage Type</span>
-                  <span className="font-bold">{report.pothole_detected ? 'Pothole' : 'Surface Issue'}</span>
+                  <span className="font-bold">{report.damageType || (report.pothole_detected ? 'Pothole' : 'Surface Issue')}</span>
                 </div>
                 <div className="flex justify-between border-b border-slate-100 dark:border-[#2A2A2A] pb-2">
                   <span className="text-slate-500 dark:text-[#A1A1AA]">Severity</span>
@@ -341,19 +341,53 @@ export const SharedReportDetail = () => {
                   <span className="text-slate-500 dark:text-[#A1A1AA]">AI Confidence</span>
                   <span className="font-bold">{Math.round(report.confidence * 100)}%</span>
                 </div>
-                <div className="flex justify-between border-b border-slate-100 dark:border-[#2A2A2A] pb-2">
-                  <span className="text-slate-500 dark:text-[#A1A1AA]">Damage Size</span>
-                  <span className="font-bold">{report.estimated_size}</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-100 dark:border-[#2A2A2A] pb-2">
-                  <span className="text-slate-500 dark:text-[#A1A1AA]">Traffic</span>
-                  <span className="font-bold">{report.traffic_level}</span>
-                </div>
-                <div className="flex justify-between pb-2">
-                  <span className="text-slate-500 dark:text-[#A1A1AA]">Weather</span>
-                  <span className="font-bold">{report.weather_risk}</span>
-                </div>
               </div>
+
+              {report.estimated_size && (
+                <div className="mb-4 bg-slate-50 dark:bg-[#151515] p-4 rounded-xl border border-slate-100 dark:border-[#2A2A2A]">
+                  <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase mb-2">Estimated Size</p>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    {report.estimatedLength && (
+                      <>
+                        <div>
+                          <span className="text-slate-500 dark:text-[#A1A1AA] block text-xs">Length</span>
+                          <span className="font-bold">{report.estimatedLength} m</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-500 dark:text-[#A1A1AA] block text-xs">Width</span>
+                          <span className="font-bold">{report.estimatedWidth} m</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-500 dark:text-[#A1A1AA] block text-xs">Area</span>
+                          <span className="font-bold">{report.estimatedArea} m²</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-500 dark:text-[#A1A1AA] block text-xs">Depth</span>
+                          <span className="font-bold">{report.estimatedDepth || 'N/A'}</span>
+                        </div>
+                      </>
+                    )}
+                    {!report.estimatedLength && (
+                      <div className="col-span-2">
+                        <span className="font-bold">{report.estimated_size}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {report.aiAssessment && (
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase mb-1">AI Assessment</p>
+                    <p className="text-sm font-medium">{report.aiAssessment}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase mb-1">Recommended Action</p>
+                    <p className="text-sm font-bold text-blue-900 dark:text-blue-300">{report.recommendedAction}</p>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

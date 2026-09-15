@@ -290,6 +290,14 @@ export const ReportPage = () => {
         confidence: analysisResult.confidence,
         severity: analysisResult.estimatedSeverity,
         estimated_size: analysisResult.estimatedSize,
+        damageType: analysisResult.detectedDamageType,
+        estimatedLength: analysisResult.estimatedLength,
+        estimatedWidth: analysisResult.estimatedWidth,
+        estimatedArea: analysisResult.estimatedArea,
+        estimatedDepth: analysisResult.estimatedDepth,
+        aiAssessment: analysisResult.aiAssessment,
+        recommendedAction: analysisResult.recommendedAction,
+        analysisTimestamp: new Date().toISOString(),
         risk_score: riskEngineResult.score,
         risk_level: riskEngineResult.level,
         risk_factors: riskEngineResult.factors,
@@ -595,9 +603,16 @@ export const ReportPage = () => {
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2">
               {analysisResult.potholeDetected ? (
                 <AIResultCard 
+                  damageType={analysisResult.detectedDamageType}
                   confidence={analysisResult.confidence}
                   severity={analysisResult.estimatedSeverity}
                   estimatedSize={analysisResult.estimatedSize}
+                  estimatedLength={analysisResult.estimatedLength}
+                  estimatedWidth={analysisResult.estimatedWidth}
+                  estimatedArea={analysisResult.estimatedArea}
+                  estimatedDepth={analysisResult.estimatedDepth}
+                  aiAssessment={analysisResult.aiAssessment}
+                  recommendedAction={analysisResult.recommendedAction}
                   riskScore={calculateRiskScore({
                     severity: analysisResult.estimatedSeverity,
                     aiConfidence: analysisResult.confidence,

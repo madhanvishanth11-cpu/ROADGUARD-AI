@@ -14,6 +14,14 @@ export interface Report {
   confidence: number;
   severity: string;
   estimated_size: string;
+  damageType?: string;
+  estimatedLength?: number;
+  estimatedWidth?: number;
+  estimatedArea?: number;
+  estimatedDepth?: string;
+  aiAssessment?: string;
+  recommendedAction?: string;
+  analysisTimestamp?: string;
   risk_score: number;
   risk_level: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
   risk_factors: any;
