@@ -6,6 +6,7 @@ import { RoleGuard } from './components/RoleGuard';
 
 import { Navigation } from './components/Navigation';
 import { LandingPage } from './pages/public/LandingPage';
+import { AboutPage } from './pages/public/AboutPage';
 import { PublicLogin } from './pages/auth/PublicLogin';
 import { OfficerLogin } from './pages/auth/OfficerLogin';
 
@@ -29,6 +30,7 @@ function App() {
               <Routes>
                 {/* PUBLIC ROUTES */}
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/about" element={<AboutPage />} />
                 <Route path="/login" element={<PublicLogin />} />
                 <Route path="/officer-login" element={<OfficerLogin />} />
                 <Route path="/report" element={<ReportPage />} />
