@@ -1,108 +1,17 @@
 import { useTitle } from '../../hooks/useTitle';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, Activity, MapPin, CheckCircle, Shield,
   AlertTriangle, EyeOff, LayoutDashboard,
-  Camera, Zap, Users, Brain, Wrench, Building2,
-  X, ChevronLeft, ChevronRight, Play
+  Camera, Zap, Users, Brain, Wrench, Building2
 } from 'lucide-react';
-
-// --- Presentation View Component ---
-const PresentationDeck = ({ onClose }: { onClose: () => void }) => {
-  const [slide, setSlide] = useState(0);
-
-  const slides = [
-    {
-      title: "RoadGuard AI",
-      content: "Smarter Roads. Faster Repairs. Safer Communities.\n\nAn AI-powered road damage reporting and repair tracking platform that connects citizens, officers and workers through one simple system."
-    },
-    {
-      title: "The Problem",
-      content: "Road damage such as potholes, cracks and damaged road surfaces can create accidents, traffic problems and inconvenience for the public.\n\nCitizens often don't know where to report, and authorities lack prioritized data."
-    },
-    {
-      title: "Our Solution",
-      content: "A unified digital platform connecting:\n\n1. Citizens (Reporting)\n2. AI (Analysis & Prioritization)\n3. Officers (Verification & Management)\n4. Workers (Execution)\n\nCreating a complete, transparent, and actionable workflow."
-    },
-    {
-      title: "How It Works",
-      content: "1. Citizen Reports issue via mobile\n2. AI analyzes damage type & severity\n3. Officer verifies & assigns priority\n4. Worker is dispatched with location data\n5. Repair is completed & verified\n6. Citizen tracks resolution in real-time"
-    },
-    {
-      title: "Technology",
-      content: "• AI-assisted Image Analysis\n• Real-time Geolocation Services\n• Secure Role-based Web Architecture\n• Digital Workflow & Assignment Management\n• Cloud Database & Storage"
-    },
-    {
-      title: "Who Benefits",
-      content: "CITIZENS: Easy reporting and transparent tracking.\nOFFICERS: Centralized dashboard to prioritize and manage reports.\nWORKERS: Clear assignments and accurate location data.\nCOMMUNITIES: Safer, better-maintained roads."
-    },
-    {
-      title: "Expected Impact",
-      content: "• Faster Reporting\n• Better Prioritization of critical issues\n• Transparent Tracking for the public\n• Efficient Coordination across departments\n• Safer Communities overall"
-    },
-    {
-      title: "Future Scope",
-      content: "• Integration with real Government Departments\n• Dedicated Mobile Native Application\n• Automatic Worker Routing Algorithms\n• Historical Road Damage Analytics\n• Smart City Infrastructure Integration"
-    }
-  ];
-
-  return (
-    <div className="fixed inset-0 z-[100] bg-slate-900 flex flex-col">
-      <div className="flex justify-between items-center p-6 bg-slate-800 text-white border-b border-slate-700">
-        <div className="font-bold tracking-widest text-slate-400 text-sm">ROADGUARD AI • ENGINEERS DAY</div>
-        <button onClick={onClose} className="hover:bg-slate-700 p-2 rounded-lg transition-colors flex items-center gap-2 font-bold text-sm">
-          <X className="w-5 h-5" /> Exit Presentation
-        </button>
-      </div>
-
-      <div className="flex-1 flex items-center justify-center p-6 relative bg-slate-900">
-        <div className="max-w-4xl w-full aspect-video bg-white dark:bg-[#111111] rounded-2xl shadow-2xl p-12 flex flex-col justify-center relative overflow-hidden transition-colors">
-          <div className="absolute top-0 left-0 w-full h-2 bg-slate-100 dark:bg-[#151515]">
-            <div className="h-full bg-blue-600 transition-all duration-300" style={{ width: `${((slide + 1) / slides.length) * 100}%` }}></div>
-          </div>
-          
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-8 transition-colors">{slides[slide].title}</h2>
-          <div className="text-xl md:text-2xl text-slate-600 dark:text-[#A1A1AA] whitespace-pre-line leading-relaxed transition-colors">
-            {slides[slide].content}
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-slate-800 p-6 flex justify-between items-center text-white border-t border-slate-700">
-        <button 
-          onClick={() => setSlide(s => Math.max(0, s - 1))} 
-          disabled={slide === 0}
-          className="px-6 py-3 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-bold flex items-center gap-2 transition-colors"
-        >
-          <ChevronLeft className="w-5 h-5" /> Previous
-        </button>
-        <div className="font-mono text-slate-400 font-bold tracking-widest">
-          {slide + 1} / {slides.length}
-        </div>
-        <button 
-          onClick={() => setSlide(s => Math.min(slides.length - 1, s + 1))}
-          disabled={slide === slides.length - 1}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-bold flex items-center gap-2 transition-colors"
-        >
-          Next <ChevronRight className="w-5 h-5" />
-        </button>
-      </div>
-    </div>
-  );
-};
-
 
 export const LandingPage = () => {
   useTitle('RoadGuard AI — Smart Road Damage Management');
 
-  const [showPresentation, setShowPresentation] = useState(false);
-
   return (
     <div className="bg-white dark:bg-black flex flex-col min-h-screen font-sans transition-colors duration-200">
       
-      {showPresentation && <PresentationDeck onClose={() => setShowPresentation(false)} />}
-
       {/* 1. HERO SECTION */}
       <section className="bg-gradient-to-b from-blue-50 to-slate-50 dark:from-black dark:to-black pt-16 pb-16 border-b border-slate-200 dark:border-[#2A2A2A] text-center px-4 relative overflow-hidden transition-colors">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/50 via-slate-50 to-slate-50 dark:from-blue-900/20 dark:via-black dark:to-black pointer-events-none"></div>
@@ -337,40 +246,7 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      {/* 11 & 12. PPT-STYLE PROJECT EXPLANATION */}
-      <section className="py-12 px-4 bg-slate-900 dark:bg-black text-white relative transition-colors">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
-            <div>
-              <h2 className="text-4xl font-black">PROJECT EXPLANATION</h2>
-              <p className="text-slate-400 mt-2">Engineers Day Challenge Documentation</p>
-            </div>
-            <button 
-              onClick={() => setShowPresentation(true)}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg flex items-center gap-2 transition-colors"
-            >
-              <Play className="w-5 h-5 fill-current" /> Presentation View
-            </button>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { num: '01', title: 'PROBLEM', desc: 'Road damage is often difficult to report, prioritize and track.' },
-              { num: '02', title: 'IDEA', desc: 'Create one digital platform connecting citizens, AI, officers and repair workers.' },
-              { num: '03', title: 'TECHNOLOGY', desc: 'AI-assisted image analysis, location services, web technology and digital workflow management.' },
-              { num: '04', title: 'SOLUTION', desc: 'RoadGuard AI converts a road damage photo into a structured, trackable repair report.' },
-              { num: '05', title: 'WORKFLOW', desc: 'Report → AI Analysis → Officer Verification → Worker Assignment → Repair → Resolution.' },
-              { num: '06', title: 'IMPACT', desc: 'A transparent and organized system for faster road maintenance and better public safety.' }
-            ].map((card, i) => (
-              <div key={i} className="bg-slate-800 p-6 rounded-2xl border border-slate-700 group hover:border-blue-500 transition-all hover:-translate-y-1 shadow-sm">
-                <div className="text-5xl font-black text-slate-700 mb-6 group-hover:text-blue-500 transition-colors">{card.num}</div>
-                <h3 className="text-xl font-bold mb-3 tracking-widest uppercase">{card.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 13. FUTURE SCOPE */}
       <section className="py-12 px-4 bg-white dark:bg-black border-b border-slate-200 dark:border-[#2A2A2A] transition-colors">
