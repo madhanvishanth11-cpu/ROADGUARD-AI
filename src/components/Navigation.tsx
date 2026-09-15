@@ -32,13 +32,13 @@ export const Navigation = () => {
   return (
     <nav className="bg-white/90 dark:bg-black backdrop-blur-md border-b border-gray-100 dark:border-[#2A2A2A] sticky top-0 z-50 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-20 sm:h-24">
           <div className="flex items-center gap-4">
             <Link to="/" className="flex-shrink-0 flex items-center gap-2">
               <img 
                 src="/branding/roadguard-logo.png" 
                 alt="RoadGuard AI" 
-                className="h-[42px] sm:h-[52px] w-auto object-contain dark:bg-white dark:rounded-md dark:p-0.5 transition-colors" 
+                className="h-[56px] sm:h-[72px] w-auto object-contain dark:bg-white dark:rounded-md dark:p-0.5 transition-colors" 
               />
               <span className="hidden sm:inline-flex ml-2 px-2 py-0.5 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 text-[10px] font-black rounded uppercase tracking-widest transition-colors">
                 Public Beta
