@@ -1,3 +1,4 @@
+import { useTitle } from '../../hooks/useTitle';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getReports } from '../../services/db/api';
@@ -6,6 +7,8 @@ import { Loader2, MapPin, Activity, Clock, ChevronRight, AlertCircle, Search, Fi
 import { RiskScoreBadge } from '../../components/RiskScoreBadge';
 
 export const MyReportsPage = () => {
+  useTitle('RoadGuard AI — Dashboard');
+
   const navigate = useNavigate();
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(true);

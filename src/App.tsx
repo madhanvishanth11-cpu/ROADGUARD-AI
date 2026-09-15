@@ -7,6 +7,7 @@ import { RoleGuard } from './components/RoleGuard';
 import { Navigation } from './components/Navigation';
 import { LandingPage } from './pages/public/LandingPage';
 import { AboutPage } from './pages/public/AboutPage';
+import { NotFoundPage } from './pages/public/NotFoundPage';
 import { PublicLogin } from './pages/auth/PublicLogin';
 import { OfficerLogin } from './pages/auth/OfficerLogin';
 
@@ -48,6 +49,9 @@ function App() {
                   <Route path="/admin" element={<Dashboard />} />
                   <Route path="/analytics" element={<Analytics />} />
                 </Route>
+                
+                {/* 404 NOT FOUND */}
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </main>
           </div>

@@ -1,3 +1,4 @@
+import { useTitle } from '../../hooks/useTitle';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -93,6 +94,8 @@ const PresentationDeck = ({ onClose }: { onClose: () => void }) => {
 
 
 export const LandingPage = () => {
+  useTitle('RoadGuard AI — Smart Road Damage Management');
+
   const [showPresentation, setShowPresentation] = useState(false);
 
   return (

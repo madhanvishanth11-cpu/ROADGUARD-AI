@@ -1,9 +1,12 @@
+import { useTitle } from '../../hooks/useTitle';
 import { useEffect, useState, useRef } from 'react';
 import { getWorkers, getAssignmentsForWorker, getReportById, submitRepairCompletion, uploadReportImage } from '../../services/db/api';
 import type { Worker, ReportAssignment, Report } from '../../types';
 import { Camera, MapPin, Loader2, CheckCircle, UploadCloud, X, ArrowRight } from 'lucide-react';
 
 export const WorkerDashboard = () => {
+  useTitle('RoadGuard AI — Worker App');
+
   const [workers, setWorkers] = useState<Worker[]>([]);
   const [currentWorker, setCurrentWorker] = useState<Worker | null>(null);
   

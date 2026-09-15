@@ -1,3 +1,4 @@
+import { useTitle } from '../../hooks/useTitle';
 import React, { useState, useRef, useCallback } from 'react';
 import { Camera, MapPin, UploadCloud, AlertTriangle, CheckCircle, Loader2, ArrowRight, X, Image as ImageIcon, Activity, Info, Map as MapIcon } from 'lucide-react';
 import { getCurrentLocation, reverseGeocode, getDistanceInMeters } from '../../utils/location';
@@ -28,6 +29,8 @@ const LocationMarker = ({ position, setPosition }: { position: L.LatLng | null, 
 };
 
 export const ReportPage = () => {
+  useTitle('RoadGuard AI — Report Road Damage');
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const aiMode = getAiProviderMode();

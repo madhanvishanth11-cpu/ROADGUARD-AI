@@ -1,3 +1,4 @@
+import { useTitle } from '../../hooks/useTitle';
 import { useState, useEffect, Component } from 'react';
 import type { ErrorInfo, ReactNode } from 'react';
 import { Search, Loader2, CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
@@ -330,8 +331,11 @@ const TrackReportContent = () => {
   );
 };
 
-export const TrackReport = () => (
-  <TrackReportErrorBoundary>
-    <TrackReportContent />
-  </TrackReportErrorBoundary>
-);
+export const TrackReport = () => {
+  useTitle('RoadGuard AI — Track Report');
+  return (
+    <TrackReportErrorBoundary>
+      <TrackReportContent />
+    </TrackReportErrorBoundary>
+  );
+};

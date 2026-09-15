@@ -35,10 +35,11 @@ export const Navigation = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center gap-4">
             <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-              <div className="p-2 bg-blue-600 rounded-lg">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <span className="font-bold text-xl text-slate-900 dark:text-white tracking-tight transition-colors">RoadGuard AI</span>
+              <img 
+                src="/branding/roadguard-logo.png" 
+                alt="RoadGuard AI" 
+                className="h-8 sm:h-11 w-auto object-contain dark:bg-white dark:rounded-md dark:p-0.5 transition-colors" 
+              />
               <span className="hidden sm:inline-flex ml-2 px-2 py-0.5 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 text-[10px] font-black rounded uppercase tracking-widest transition-colors">
                 Public Beta
               </span>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, User as UserIcon, ArrowRight } from 'lucide-react';
+import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const PublicLogin = () => {
@@ -34,10 +34,13 @@ export const PublicLogin = () => {
     <div className="min-h-[calc(100vh-64px)] bg-slate-50 dark:bg-black flex items-center justify-center p-4 transition-colors">
       <div className="max-w-md w-full bg-white dark:bg-[#111111] rounded-2xl shadow-sm border border-slate-200 dark:border-[#2A2A2A] overflow-hidden transition-colors">
         <div className="bg-blue-600 dark:bg-blue-700 p-6 text-center transition-colors">
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-            <UserIcon className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-2xl font-black text-white">Public Sign In</h2>
+          <img 
+            src="/branding/roadguard-logo.png" 
+            alt="RoadGuard AI" 
+            className="h-16 w-auto mx-auto mb-4 object-contain bg-white rounded-md p-1" 
+          />
+          <span className="inline-block px-2 py-0.5 bg-blue-800 text-blue-100 text-[10px] font-black rounded uppercase tracking-widest mb-2">Public Beta</span>
+          <h2 className="text-2xl font-black text-white">Demo Citizen Login</h2>
           <p className="text-blue-100 mt-2 text-sm">Sign in to report road damage and track your reports.</p>
         </div>
         

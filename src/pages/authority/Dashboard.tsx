@@ -1,3 +1,4 @@
+import { useTitle } from '../../hooks/useTitle';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, Search, RefreshCw } from 'lucide-react';
@@ -34,6 +35,8 @@ const getMarkerIcon = (priority: string) => {
 };
 
 export const Dashboard = () => {
+  useTitle('RoadGuard AI — Officer Portal');
+
   const navigate = useNavigate();
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(true);

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, Shield, ArrowRight } from 'lucide-react';
+import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const OfficerLogin = () => {
@@ -34,10 +34,11 @@ export const OfficerLogin = () => {
     <div className="min-h-[calc(100vh-64px)] bg-slate-100 dark:bg-black flex items-center justify-center p-4 transition-colors">
       <div className="max-w-md w-full bg-white dark:bg-[#111111] rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-[#2A2A2A] transition-colors">
         <div className="bg-slate-800 dark:bg-black p-6 text-center border-b-4 border-blue-600 transition-colors">
-          <div className="w-16 h-16 bg-slate-700 dark:bg-[#111111] rounded-2xl flex items-center justify-center mx-auto mb-4 transition-colors">
-            <Shield className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-2xl font-black text-white">RoadGuard AI</h2>
+          <img 
+            src="/branding/roadguard-logo.png" 
+            alt="RoadGuard AI" 
+            className="h-16 w-auto mx-auto mb-4 object-contain dark:bg-white dark:rounded-md dark:p-1" 
+          />
           <p className="text-slate-300 dark:text-[#A1A1AA] mt-2 text-sm font-bold tracking-wide uppercase">Officer Portal</p>
           <p className="text-slate-400 dark:text-[#A1A1AA] mt-1 text-xs">Monitor, verify and manage road damage reports.</p>
         </div>

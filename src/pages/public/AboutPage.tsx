@@ -1,8 +1,11 @@
+import { useTitle } from '../../hooks/useTitle';
 import { Link } from 'react-router-dom';
 import { Camera, MapPin, ListChecks, CheckCircle, Brain, ArrowRight, Check, Clock } from 'lucide-react';
 import { RiskScoreBadge } from '../../components/RiskScoreBadge';
 
 export const AboutPage = () => {
+  useTitle('RoadGuard AI — About the Project');
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-white transition-colors">
       
