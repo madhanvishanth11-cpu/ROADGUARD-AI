@@ -37,6 +37,9 @@ export const ReportPage = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [imageError, setImageError] = useState('');
+  const [isCompressing, setIsCompressing] = useState(false);
+  const [originalSize, setOriginalSize] = useState<number | null>(null);
+  const [optimizedSize, setOptimizedSize] = useState<number | null>(null);
   
   // Location State
   const [location, setLocation] = useState<{ latitude: number; longitude: number; accuracy?: number } | null>(null);
@@ -57,27 +60,88 @@ export const ReportPage = () => {
   const [duplicateWarning, setDuplicateWarning] = useState(false);
 
   // --- Image Upload Handlers ---
-  const processFile = (file: File) => {
+  const processFile = async (file: File) => {
     setImageError('');
     setAnalysisError('');
+    setOriginalSize(null);
+    setOptimizedSize(null);
     
-    if (!['image/jpeg', 'image/png', 'image/webp', 'image/jpg'].includes(file.type)) {
+    if (!file.type.startsWith('image/')) {
       setImageError('Please upload a valid image file (JPG, PNG, WEBP).');
       return;
     }
-    if (file.size > 10 * 1024 * 1024) {
-      setImageError('Image is too large. Maximum size is 10MB.');
-      return;
-    }
 
-    setImage(file);
-    const reader = new FileReader();
-    reader.onloadend = () => setImagePreview(reader.result as string);
-    reader.readAsDataURL(file);
-    
-    setAnalysisResult(null);
-    setSubmitError('');
-    setDuplicateWarning(false);
+    setIsCompressing(true);
+    setOriginalSize(file.size);
+
+    try {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.src = url;
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+
+      let width = img.width;
+      let height = img.height;
+      
+      const MAX_DIMENSION = 1920;
+      if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+        if (width > height) {
+          height = Math.round(height * (MAX_DIMENSION / width));
+          width = MAX_DIMENSION;
+        } else {
+          width = Math.round(width * (MAX_DIMENSION / height));
+          height = MAX_DIMENSION;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error("Canvas not supported");
+      
+      ctx.drawImage(img, 0, 0, width, height);
+      URL.revokeObjectURL(url);
+
+      let quality = 0.8;
+      let blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+      
+      // Try to compress if > 5MB
+      while (blob && blob.size > 5 * 1024 * 1024 && quality > 0.4) {
+        quality -= 0.1;
+        blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+      }
+
+      if (!blob) throw new Error("Compression failed");
+
+      // Check final size against 10MB limit
+      if (blob.size > 10 * 1024 * 1024) {
+        setImageError('Image could not be compressed below 10MB. Please choose another image.');
+        setIsCompressing(false);
+        return;
+      }
+
+      const optimizedFile = new File([blob], "roadguard-report.jpg", { type: "image/jpeg" });
+      
+      setOptimizedSize(optimizedFile.size);
+      setImage(optimizedFile);
+      
+      const reader = new FileReader();
+      reader.onloadend = () => setImagePreview(reader.result as string);
+      reader.readAsDataURL(optimizedFile);
+
+      setAnalysisResult(null);
+      setSubmitError('');
+      setDuplicateWarning(false);
+    } catch (err) {
+      console.error("Compression error", err);
+      setImageError('Unable to process this image. Please try another photo.');
+    } finally {
+      setIsCompressing(false);
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -102,9 +166,13 @@ export const ReportPage = () => {
     if (file) processFile(file);
   };
 
+  const formatBytes = (bytes: number) => (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+
   const removeImage = () => {
     setImage(null);
     setImagePreview(null);
+    setOriginalSize(null);
+    setOptimizedSize(null);
     setAnalysisResult(null);
     setAnalysisError('');
     setSubmitError('');
@@ -316,36 +384,57 @@ export const ReportPage = () => {
           )}
           
           {!imagePreview ? (
-            <div 
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-              className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${isDragging ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-slate-300 dark:border-[#2A2A2A] hover:bg-slate-50 dark:bg-black hover:border-blue-400'}`}
-            >
-              <UploadCloud className={`w-12 h-12 mx-auto mb-4 ${isDragging ? 'text-blue-500' : 'text-slate-400 dark:text-[#A1A1AA]'}`} />
-              <p className="text-slate-700 dark:text-[#A1A1AA] font-medium text-lg mb-1">Drag and drop your image here</p>
-              <p className="text-sm text-slate-500 dark:text-[#A1A1AA] mb-4">or click to browse from your device</p>
-              
-              <div className="flex items-center justify-center gap-4 mt-6">
-                <button 
-                  type="button" 
-                  onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-                  className="px-4 py-2 bg-white dark:bg-[#111111] border border-slate-300 dark:border-[#2A2A2A] text-slate-700 dark:text-[#A1A1AA] rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-slate-50 dark:bg-black"
-                >
-                  <ImageIcon className="w-4 h-4" /> Browse
-                </button>
-                <button 
-                  type="button" 
-                  onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-                  className="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-blue-100 dark:bg-blue-900/30 sm:hidden"
-                >
-                  <Camera className="w-4 h-4" /> Camera
-                </button>
+            isCompressing ? (
+              <div className="border-2 border-dashed border-slate-300 dark:border-[#2A2A2A] rounded-xl p-12 text-center">
+                <Loader2 className="w-12 h-12 mx-auto mb-4 animate-spin text-blue-500" />
+                <p className="text-slate-700 dark:text-white font-bold text-lg mb-2">Optimizing image...</p>
+                <p className="text-slate-500 dark:text-[#A1A1AA] text-sm">Compressing and resizing for AI analysis.</p>
               </div>
-            </div>
+            ) : (
+              <div 
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+                className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${isDragging ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-slate-300 dark:border-[#2A2A2A] hover:bg-slate-50 dark:bg-black hover:border-blue-400'}`}
+              >
+                <UploadCloud className={`w-12 h-12 mx-auto mb-4 ${isDragging ? 'text-blue-500' : 'text-slate-400 dark:text-[#A1A1AA]'}`} />
+                <p className="text-slate-700 dark:text-[#A1A1AA] font-medium text-lg mb-1">Drag and drop your image here</p>
+                <p className="text-sm text-slate-500 dark:text-[#A1A1AA] mb-4">or click to browse from your device</p>
+                
+                <div className="flex items-center justify-center gap-4 mt-6">
+                  <button 
+                    type="button" 
+                    onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
+                    className="px-4 py-2 bg-white dark:bg-[#111111] border border-slate-300 dark:border-[#2A2A2A] text-slate-700 dark:text-[#A1A1AA] rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-slate-50 dark:bg-black"
+                  >
+                    <ImageIcon className="w-4 h-4" /> Browse
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
+                    className="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-blue-100 dark:bg-blue-900/30 sm:hidden"
+                  >
+                    <Camera className="w-4 h-4" /> Camera
+                  </button>
+                </div>
+              </div>
+            )
           ) : (
             <div className="relative rounded-xl overflow-hidden bg-slate-100 dark:bg-[#111111] border border-slate-200 dark:border-[#2A2A2A]">
+              {originalSize && optimizedSize && (
+                <div className="bg-green-50 dark:bg-green-900/20 border-b border-green-100 dark:border-green-900/50 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                  <div className="flex items-center gap-2 text-green-700 dark:text-green-400 font-medium">
+                    <CheckCircle className="w-4 h-4" />
+                    {optimizedSize < originalSize ? 'Image optimized successfully' : 'Image ready'}
+                  </div>
+                  <div className="flex gap-3 text-slate-500 dark:text-[#A1A1AA] text-xs font-mono">
+                    {optimizedSize < originalSize && <span>Original: {formatBytes(originalSize)}</span>}
+                    <span className="font-bold text-slate-700 dark:text-slate-300">Optimized: {formatBytes(optimizedSize)}</span>
+                  </div>
+                </div>
+              )}
+              
               <div className="relative">
                 <img 
                   ref={imageRef}
@@ -496,7 +585,7 @@ export const ReportPage = () => {
           {!analysisResult ? (
             <button
               onClick={handleAnalyzeImage}
-              disabled={isAnalyzing}
+              disabled={isAnalyzing || isCompressing}
               className="w-full px-6 py-4 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 rounded-lg font-bold text-lg hover:bg-blue-100 dark:bg-blue-900/30 transition-colors flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isAnalyzing ? <Loader2 className="w-6 h-6 animate-spin" /> : <Activity className="w-6 h-6" />}
